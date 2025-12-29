@@ -1,0 +1,94 @@
+function createDataset(fields, constraints, sortFields) {
+
+    var dataset = DatasetBuilder.newDataset();
+
+    log.info(">>>>>>>>>>>>>>>>>>>>>>ENTREI NO DATASET");  
+    try {  
+    	log.info(">>>>>>>>>>>>>>>>>>>>>>ENTREI NO TRY");     	
+ 
+        var clientService = fluigAPI.getAuthorizeClientService();
+        var data = {   
+          companyId : getValue("WKCompany") + '',
+          serviceCode: 'rest-protheus',
+          endpoint: '/ANGWS002',
+          method: 'post', // 'delete', 'patch', 'post', 'get'             
+          timeoutService: '100', // segundos  
+          headers: {
+        	    "Accept-Charset": "UTF-8",
+        	    "Content-Type": "application/json",
+        	  },          
+          params :{
+        	  "Empresa": "01",
+        	  "query": "SELECT A1_COD, A1_CGC,A1_LOJA,A1_NOME,A1_NREDUZ FROM SA1010 WHERE A1_XTIPOCL = '2' AND A1_MSBLQL = '2' AND D_E_L_E_T_ = ' ' ORDER BY A1_COD,A1_LOJA"
+          },
+        }
+          
+        //log.info("### json: "+JSONUtil.toJSON(data))    
+        var vo = clientService.invoke(JSONUtil.toJSON(data));
+
+        let result = JSON.parse(vo.getResult());
+        
+        //log.info("### vo.getResult(): "+vo.getResult());
+        log.info(result.content);     
+                
+ 
+        if(vo.getResult() == null || vo.getResult().isEmpty()){
+        	log.error("Erro: Sem retorno"); 
+        	dataset.addColumn("status");   
+        	dataset.addRow(new Array("NOK"))
+        }else if (result.errorMessage !== undefined) {  
+            var msgErro = result.errorMessage;  
+            log.error("Erro: " + msgErro);  
+            dataset.addColumn("status");   
+            dataset.addRow(new Array("NOK"))
+         }else{
+        	 
+        	    dataset.addColumn("A1_COD");
+        	    dataset.addColumn("A1_LOJA");
+        	    dataset.addColumn("A1_NOME");
+        	    dataset.addColumn("A1_NREDUZ");   
+        	    dataset.addColumn("A1_CGC");
+        	 
+             // Adiciona os dados no dataset  
+             for each(row in result.items) {       	
+                 dataset.addRow(new Array(   row.a1_cod,
+                 							row.a1_loja,
+                 							removerEspacosDireita(row.a1_nome),
+                 							removerEspacosDireita(row.a1_nreduz),
+                 							removerEspacosDireita(row.a1_cgc)
+                                         ));       
+             }         	 
+        	 
+         }
+             
+    } catch (e) {  
+         if (e == null)  
+             e = "Erro desconhecido; verifique o log do AppServer";  
+         var mensagemErro = "Erro na comunicação com o app (linha: " + e.lineNumber + "): " + e;  
+         log.error(mensagemErro);  
+         log.info(mensagemErro);  
+         dataset.addColumn("status"); 
+         dataset.addRow(new Array("NOK"))  
+    }      
+    
+    return dataset;
+}
+
+function removerEspacosDireita(str) {
+    return str.replace(/\s+$/, '');
+}
+
+function getConstraints(constraints){
+	var params = new Object();
+	log.info("#constraints: " + constraints);
+	if(constraints != null)
+	if(constraints.length > 0){
+		for (var i in constraints){
+			log.info("#constraints: " + constraints[i].fieldName + " value: " + constraints[i].initialValue);			
+			if(constraints[i].fieldName == "CODIGO_EMPRESA") params.empresa = constraints[i].initialValue;
+		}
+	}else{
+		log.error("#não foram enviados os params");
+	}	
+    return params;
+}

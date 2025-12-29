@@ -1,0 +1,1524 @@
+<html>
+   <head>
+      <link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+      <link type="text/css" rel="stylesheet" href="pikaday.min.css" />
+      <script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+      <script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+      <script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+      <script type="text/javascript" src="jquery.mask.min.js"></script>
+      <script type="text/javascript" src="jquery.maskMoney.min.js"></script>
+      <script src="/webdesk/vcXMLRPC.js"></script>
+      <link type="text/css" rel="stylesheet" href="contratoPrevidencia.css"/>
+      <script type="text/javascript" src="anexos.js" charset="utf-8"></script>
+      <script type="text/javascript" src="contratoPrevidencia.js"></script>
+      <script type="text/javascript" src="atividades.js"></script>
+      <script type="text/javascript" src="requiredFieldsRule.js"></script>
+      <script type="text/javascript" src="beforeSendValidate.js"></script>
+      <script type="text/javascript" src="pikaday.min.js"></script>
+   </head>
+   <body>
+      <div class="fluig-style-guide">
+         <!-- INÍCIO: formulário geral -->
+         <form class="modForm" role="form" name="frm" id="frm">
+            <input type="hidden" class="form-control" id ="campoDescritor" name="campoDescritor" readonly>
+            <div class="panel panel-default">
+               <div class="panel-body">
+                  <!-- INÍCIO: título de cabeçalho -->
+                  <div class="panel-heading css_heading vertical-center">
+                     <div class="panel-body">
+                        <div class="row ">
+                           <div class="col-md-12 col-xs-12">
+                              <div class="col-md-6">
+                                 <img src="logo-Angel-Sports.png" />
+                              </div>
+                              <div class="col-md-6">
+                                 <h1 style="font-size: 20px; color: white; font-weight: bold; padding-left: 5px;">Contratos de Previdência</h1>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <!-- FINAL: título de cabeçalho -->
+                  <br/><br/>
+                  <!-- INÍCIO: informações da solicitação -->
+                  <div class="panel panel-primary" id="secInformacoes" name="secInformacoes">
+                     <div class="panel-heading">
+                        <div>
+                           <h3 style="font-weight: bold !important;" class="panel-title">Informações Gerais <input class="inputTransparent" type="text" name="tipoPessoa" id="tipoPessoa" value="" readOnly></h3>
+                        </div>
+                     </div>
+                     <div class="panel-body">
+                        <!-- INÍCIO: informações do solicitante -->
+                        <section>
+                           <div class="row">
+                              <div class="col-md-6 col-xs-12" style="font-size: 11;">
+                                 <div class="col-md-4">
+                                    <label for="processNumber" style="font-size: 15px;"><b>Nº Solicitação:</b></label>
+                                    <input class="form-control inputTransparent2" type="text" id="processNumber" name="processNumber" readonly />
+                                 </div>
+                                 <div class="col-md-4">
+                                    <label for="nameUserCreation" style="font-size: 15px;"><b>Usuário:</b></label>									
+                                    <input class="form-control inputTransparent2" type="text" id="nameUserCreation" name="nameUserCreation" readonly />
+                                 </div>
+                                 <div class="col-md-4">
+                                    <label for="creationDate" style="font-size: 15px;"><b>Data Cadastral:</b></label>					
+                                    <input style="font-size: 15px;" class="form-control date" type="text" id="creationDate" name="creationDate" />
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-5">
+                                 <div class="form-group">
+                                    <label class="control-label" for="rdTipoInclusaoProposta">Tipo de inclusão</label>
+                                    <label class="radio">
+                                       <div class="radio">
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoProposta" value="proposta">Proposta
+                                    </label>
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoAnexo" value="anexo">Anexo
+                                    </label>
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoSaldo" value="saldo">Saldo
+                                    </label>
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoResgate" value="resgate">Resgate
+                                    </label>                                                    
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoComissao" value="comissao">Comissão
+                                    </label>                                                                                                           
+                                    </div>
+                                    </label>
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="zoomEmpresaProtheus">Empresa</label>
+                                    <input type="hidden" class="form-control" id="cdEmpresaProtheus" name="cdEmpresaProtheus">
+                                    <input type="zoom" class="form-control" id="zoomEmpresaProtheus" name="zoomEmpresaProtheus"
+                                       data-zoom="{
+                                       'displayKey': 'M0_FILIAL',
+                                       'datasetId': 'ds_empresaFilialProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'M0_CODFIL',
+                                       'label': 'Código'	
+                                       },                                                        
+                                       {
+                                       'field': 'M0_FILIAL',
+                                       'label': 'Nome',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       },
+                                       {
+                                       'field': 'M0_CODIGO',
+                                       'visible': 'false'
+                                       },
+                                       {
+                                       'field': 'M0_NOMECOM',
+                                       'visible': 'false'
+                                       }                                                                
+                                       ]
+                                       }"/>
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="filialProtheus">Filial</label>
+                                    <input type="hidden" class="form-control" id="cdFilialProtheus" name="cdFilialProtheus">
+                                    <input type="text" class="form-control" id="filialProtheus" name="filialProtheus" readonly="readonly"/>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-6">
+                                 <div class="form-group">
+                                    <label class="control-label" for="nomeSolicitante">Nome do Solicitante</label>
+                                    <input type="text" class="form-control" id ="nomeSolicitante" name="nomeSolicitante" readonly>
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-6">
+                                 <div class="form-group">
+                                    <label class="control-label" for="emailSolicitante">E-mail do Solicitante</label>
+                                    <input type="text" class="form-control" id="emailSolicitante" name="emailSolicitante" readonly>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="zoomNomeCompleto">Nome Completo</label>
+                                    <input type="hidden" class="form-control" id="a1pessoa" name=a1pessoa>
+                                    <input type="hidden" class="form-control" id="a1cod" name=a1cod>
+                                    <input type="hidden" class="form-control" id="a1loja" name="a1loja">
+                                    <input type="zoom" class="form-control" id="zoomNomeCompleto" name="zoomNomeCompleto"
+                                       data-zoom="{
+                                       'displayKey': 'A1_NOME',
+                                       'datasetId': 'ds_listaClientesProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'A1_NOME',
+                                       'label': 'Nome',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       },
+                                       {
+                                       'field': 'A1_COD',
+                                       'label': 'Código'
+                                       },
+                                       {
+                                       'field': 'A1_CGC',
+                                       'label': 'CPF/CNPJ'
+                                       }
+                                       ]
+                                       }" value="" />
+                                    <!-- <input type="hidden" id="matriculaSupervisor" name="matriculaSupervisor"/> -->
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="zoomcpfCnpj">CPF</label>
+                                    <input type="zoom" class="form-control" id="zoomcpfCnpj" name="zoomcpfCnpj" 
+                                       data-zoom="{
+                                       'displayKey': 'A1_CGC',
+                                       'datasetId': 'ds_listaClientesProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'A1_NOME',
+                                       'label': 'Nome'
+                                       },
+                                       {
+                                       'field': 'A1_COD',
+                                       'label': 'Código'
+                                       },
+                                       {
+                                       'field': 'A1_CGC',
+                                       'label': 'CPF/CNPJ',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       }
+                                       ]
+                                       }"/>
+                                    <!-- <input type="hidden" id="matriculaSupervisor" name="matriculaSupervisor"/> -->
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="dataNascimento">Nascimento</label>
+                                    <input type="text" class="form-control" id="dataNascimento" name="dataNascimento">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cep">CEP - Endereço Brasil</label>
+                                    <input type="text" class="form-control cep" id="cep" name="cep">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-5">
+                                 <div class="form-group">
+                                    <label class="control-label" for="rua">Rua - Endereço Brasil</label>
+                                    <input type="text" class="form-control" id="rua" name="rua">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="bairro">Bairro - Endereço Brasil</label>
+                                    <input type="text" class="form-control" id="bairro" name="bairro">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="numero">Nº - Endereço Brasil</label>
+                                    <input type="text" class="form-control" id="numero" name="numero">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="uf">Estado - Endereço Brasil</label>
+                                    <input type="hidden" class="form-control" id="codUF" name="codUF">
+                                    <input type="zoom" class="form-control" id="uf" name="uf"
+                                       data-zoom="{
+                                       'displayKey': 'X5_DESCRI',
+                                       'datasetId': 'ds_estadoProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'X5_CHAVE',
+                                       'label': 'Código'
+                                       },                                                        
+                                       {
+                                       'field': 'X5_DESCRI',
+                                       'label': 'Descrição',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       }
+                                       ]
+                                       }">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-5">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cidade">Cidade - Endereço Brasil</label>
+                                    <input type="hidden" class="form-control" id="codCidade" name="codCidade">
+                                    <input type="zoom" class="form-control" id="cidade" name="cidade"
+                                       data-zoom="{
+                                       'displayKey': 'CC2_MUN',
+                                       'datasetId': 'ds_municipioProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'CC2_CODMUN',
+                                       'label': 'Código'
+                                       },                                                        
+                                       {
+                                       'field': 'CC2_MUN',
+                                       'label': 'Descrição',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       }
+                                       ]
+                                       }">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-7">
+                                 <div class="form-group">
+                                    <label class="control-label" for="endExterior">Endereço Exterior</label>
+                                    <input type="text" class="form-control" id="endExterior" name="endExterior">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-5">
+                                 <div class="form-group">
+                                    <label class="control-label" for="nifIcamaId">NIF/ICAMA/IDESTRANGEIRO</label>
+                                    <input type="text" class="form-control" id="nifIcamaId" name="nifIcamaId">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="nomeConjuge">Cônjuge</label>
+                                    <input type="text" class="form-control" id="nomeConjuge" name="nomeConjuge">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-3 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cpfConjuge">CPF Cônjuge</label>
+                                    <input type="text" class="form-control" id="cpfConjuge" name="cpfConjuge">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-3 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="dtNasConjuge">Dt Nascimento Cônjuge</label>
+                                    <input type="text" class="form-control campo-Data" id="dtNasConjuge" name="dtNasConjuge">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="saidaDefinitiva">Saída definitiva</label>
+                                    <input type="text" class="form-control" id="saidaDefinitiva" name="saidaDefinitiva">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="telefoneBrasil">Telefone Brasil</label>
+                                    <input type="text" class="form-control" id="telefoneBrasil" name="telefoneBrasil">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="telefoneExterior">Telefone Exterior</label>
+                                    <input type="text" class="form-control" id="telefoneExterior" name="telefoneExterior">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="rdMenorIdadeSim">Menor de Idade</label>
+                                    <label class="radio">
+                                       <div class="radio">
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdMenorIdade" id="rdMenorIdadeSim" value="sim">Sim
+                                    </label>
+                                    <label class="radio-inline">
+                                    <input type="radio" name="rdMenorIdade" id="rdMenorIdadeNao" value="nao">Não
+                                    </label>
+                                    </div>
+                                    </label>
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="estadoNascimento">Estado de Nascimento</label>
+                                    <input type="hidden" class="form-control" id="codEstadoNascimento" name="codEstadoNascimento">
+                                    <input type="zoom" class="form-control" id="estadoNascimento" name="estadoNascimento"
+                                       data-zoom="{
+                                       'displayKey': 'X5_DESCRI',
+                                       'datasetId': 'ds_estadoProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'X5_CHAVE',
+                                       'label': 'Código'
+                                       },                                                        
+                                       {
+                                       'field': 'X5_DESCRI',
+                                       'label': 'Descrição',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       }
+                                       ]
+                                       }">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row">
+                              <div class="col-xs-12 col-sm-6 col-md-4">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cidadeNascimento">Cidade de Nascimento</label>
+                                    <input type="hidden" class="form-control" id="codCidadeNascimento" name="codCidadeNascimento">
+                                    <input type="zoom" class="form-control" id="cidadeNascimento" name="cidadeNascimento"
+                                       data-zoom="{
+                                       'displayKey': 'CC2_MUN',
+                                       'datasetId': 'ds_municipioProtheus',
+                                       'maximumSelectionLength':'1',
+                                       'fields': [
+                                       {
+                                       'field': 'CC2_CODMUN',
+                                       'label': 'Código'
+                                       },                                                        
+                                       {
+                                       'field': 'CC2_MUN',
+                                       'label': 'Descrição',	
+                                       'standard': 'true',
+                                       'search': 'true'
+                                       }
+                                       ]
+                                       }"	                                            >
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <label for="responsavelComercial" class="control-label">Responsável Comercial</label>
+                                 <input type="text" class="form-control" id="responsavelComercial" name="responsavelComercial">
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <label for="emailComercial" class="control-label">E-mail</label>
+                                 <input type="text" class="form-control" id="emailComercial" name="emailComercial">
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="situacao">Situação</label>
+                                    <select class="form-control" id="situacao" name="situacao">
+                                       <option value="">Selecionar...</option>
+                                       <option value="ativo">Ativo</option>
+                                       <option value="inativo">Inativo</option>
+                                    </select>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row" id="menorIdadeInputs" style="display: none;">
+                              <hr>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="nomeResponsavelMenor">Nome Resp. Legal</label>
+                                    <input type="text" class="form-control" id="nomeResponsavelMenor" name="nomeResponsavelMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-3 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cpfResponsavelMenor">CPF</label>
+                                    <input type="text" class="form-control" id="cpfResponsavelMenor" name="cpfResponsavelMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-3 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="dtNasRespMenor">Dt Nascimento</label>
+                                    <input type="date" class="form-control" id="dtNasRespMenor" name="dtNasRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="parentescoMenor">Parentesco</label>
+                                    <input type="text" class="form-control" id="parentescoMenor" name="parentescoMenor">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row" id="menorIdadeInputsEnd" style="display: none;">
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="ruaRespMenor">Rua</label>
+                                    <input type="text" class="form-control" id="ruaRespMenor" name="ruaRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-6 col-md-3">
+                                 <div class="form-group">
+                                    <label class="control-label" for="bairroRespMenor">Bairro</label>
+                                    <input type="text" class="form-control" id="bairroRespMenor" name="bairroRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="numeroRespMenor">Nº </label>
+                                    <input type="text" class="form-control" id="numeroRespMenor" name="numeroRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="cidadeRespMenor">Cidade</label>
+                                    <input type="text" class="form-control" id="cidadeRespMenor" name="cidadeRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="ufRespMenor">Estado</label>
+                                    <input type="text" class="form-control" id="ufRespMenor" name="ufRespMenor">
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="row" id="menorIdadeInputsEnd1" style="display: none;">
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <div class="form-group">
+                                    <label class="control-label" for="telefoneRespMenor">Telefone Exterior</label>
+                                    <input type="text" class="form-control" id="telefoneRespMenor" name="telefoneRespMenor">
+                                 </div>
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-4">
+                                 <label for="emailRespMenor" class="control-label">E-mail</label>
+                                 <input type="text" class="form-control" id="emailRespMenor" name="emailRespMenor">
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <label for="profissaoRespMenor" class="control-label">Profissão</label>
+                                 <input type="text" class="form-control" id="profissaoRespMenor" name="profissaoRespMenor">
+                              </div>
+                              <div class="col-xs-12 col-sm-4 col-md-2">
+                                 <label for="rendaRespMenor" class="control-label">Renda Mensal</label>
+                                 <input type="text" class="form-control" id="rendaRespMenor" name="rendaRespMenor">
+                              </div>
+                           </div>
+                           <br> <br>
+                           <!-- <div class="panel panel-primary">
+                              <div class="panel-heading"><strong>PROPOSTAS</strong></div>
+                              
+                                  <div class="row form-group" style="padding-left: 10px; padding-top: 5;">
+                                      <div class="col-md-2">
+                                          <a class="btn btn-success" id="btn_incluirProposta" name="btn_incluirProposta" role="button">Incluir Proposta</a>
+                                      </div>
+                              
+                                  </div>
+                              
+                                  <div class="panel-body">
+                                      <table tablename="tablePropostas" id="tablePropostas" noaddbutton=true class="table produto-table" nodeletebutton="true">
+                                          <thead>
+                                              <tr>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+                                              <tr>
+                                                  <td class="action">
+                                                      <div class="row">
+                                                          <div class="col-xs-12 col-sm-6 col-md-1">
+                                                              <div class="form-group">
+                                                                  <div id="div-trashItens" style="padding-top: 15px;">
+                                                                      <i class="flaticon flaticon-trash icon-xl" onclick="fnCustomDeleteProposta(this); autoClose:true;" style="cursor:pointer"></i>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-3">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="propostaNum">Proposta</label>
+                                                                  <input type="text" class="form-control" id="propostaNum" name="propostaNum">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-md-4">
+                                                              <label class="radio">
+                                                                  <div class="radio-inline">
+                                                                      <label>
+                                                                          <input type="radio" name="progRegre" id="progressivo" value="progressivo"><strong>Progressivo</strong>
+                                                                      </label>
+                                                                  </div>
+                                                                  <div class="radio-inline">
+                                                                      <label>
+                                                                          <input type="radio" name="progRegre" id="regressivo" value="regressivo"><strong>Regressivo</strong>
+                                                                      </label>
+                                                                  </div>
+                                                              </label>
+                                                          </div>
+                                                          <div class="col-md-4"  style="margin-top: -11.4px;">
+                                                              <label class="radio">
+                                                                  <div class="radio-inline">
+                                                                      <label>
+                                                                          <input type="radio" name="tableMensalidadeAporte" id="mensalidade" value="mensalidade"><strong>Mensalidade</strong>
+                                                                      </label>
+                                                                  </div>
+                                                                  <div class="radio-inline">
+                                                                      <label>
+                                                                          <input type="radio" name="tableMensalidadeAporte" id="aporte" value="aporte"><strong>Aporte</strong>
+                                                                      </label>
+                                                                  </div>
+                                                                  <input type="text" class="form-control" id="tableValueMouApt" name="tableValueMouApt" style="margin-top: 4.6px;">
+                                                              </label>
+                                                          </div>
+                              
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableSaldo">Saldo</label>
+                                                                  <input type="text" class="form-control" id="tableSaldo" name="tableSaldo">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableVgblPgbl">VGBL ou PGBL</label>
+                                                                  <input type="text" class="form-control" id="tableVgblPgbl" name="tableVgblPgbl">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableFormPag">Forma de Pagamento</label>
+                                                                  <input type="text" class="form-control" id="tableFormPag" name="tableFormPag">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableResp">Responsável</label>
+                                                                  <input type="text" class="form-control" id="tableResp" name="tableResp">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableEmail">E-mail</label>
+                                                                  <input type="text" class="form-control" id="tableEmail" name="tableEmail">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableDataConcBen">Data de concessão de benefício</label>
+                                                                  <input type="date" class="form-control" id="tableDataConcBen" name="tableDataConcBen">
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                      <div class="row">
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tableFundo">Fundo</label>
+                                                                  <input type="text" class="form-control" id="tableFundo" name="tableFundo">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4">
+                                                              <div class="form-group">
+                                                                  <label class="control-label" for="tablePercent">Percentual de Aplicação</label>
+                                                                  <input type="text" class="form-control" id="tablePercent" name="tablePercent">
+                                                              </div>
+                                                          </div>
+                                                          <div class="col-xs-12 col-sm-6 col-md-4" style="padding-top: 24px;">
+                                                              <div class="form-group">
+                                                                  <a class="btn btn-success" id="btn_incluir_fundo" name="btn_incluir_fundo" role="button">Incluir outro Fundo</a>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                              
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                                  </div>
+                              </div> -->
+                           <!-- Início tabela seguradora e saldo -->
+                           <div class="panel panel-primary" id="painel_seguradora">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title"> 
+                                    <b>Saldo da Carteira</b>
+                                 </h3>
+                              </div>
+                              <div class="panel-body">
+                                 <div class="row">
+                                    <div class="col-md-5" id="botaoAddseguradora">
+                                       <button type="button" id="btNovoItemseguradora" name="btNovoItemseguradora" class="btn btn-default  btn-info" onclick="addLinhaTb()" value="Novo">Inserir Seguradora</button>
+                                    </div>
+                                    <div class="row ">
+                                       <div class="col-md-12">
+                                          <div class="table-responsive">
+                                             <table tablename="dadositensseguradora" id="dadositensseguradora" class="table table-hover" noaddbutton="true" nodeletebutton="true"  addbuttonclass="btn btn-default  btn-info" addbuttonlabel="Inserir Seguradora">
+                                                <thead>
+                                                   <tr>
+                                                   </tr>
+                                                </thead>
+                                                <tbody id="tbody_dadositensseguradora">
+                                                   <tr>
+                                                      <td>
+
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                               <i class="btn btn-default btn-danger remove-child" id="del_itemseguradora" name="del_itemseguradora" onclick="Javascript:fnWdkRemoveChild(this);calcularSoma();calcularSomaComissao();calcularSomaResgate()">X</i>                                                                      
+                                                               <input type="hidden" name="seqLinha" id="seqLinha"/>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                               <label for="txt_seguradora"><strong>Seguradora</strong></label>
+                                                               <input type="hidden" class="form-control" name="txt_cdSeguradora" id="txt_cdSeguradora">
+                                                               <input type="zoom" class="form-control" name="txt_seguradora" id="txt_seguradora" 
+                                                                  data-zoom="{
+                                                                  'displayKey': 'A1_NOME',
+                                                                  'datasetId': 'ds_seguradorasProtheus',
+                                                                  'maximumSelectionLength':'1',
+                                                                  'fields': [
+                                                                  {
+                                                                  'field': 'A1_COD',
+                                                                  'label': 'Código'
+                                                                  },														
+                                                                  {
+                                                                  'field': 'A1_NOME',
+                                                                  'label': 'Nome',	
+                                                                  'standard': 'true',
+                                                                  'search': 'true'
+                                                                  }
+                                                                  ]
+                                                                  }"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_propostaSeguradora"><strong>Proposta</strong></label>
+                                                               <input type="text" class="form-control" name="txt_propostaSeguradora" id="txt_propostaSeguradora" />
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_investEsporadico"><strong>Investimento esporádico</strong></label>
+                                                               <input type="text" class="form-control" name="txt_investEsporadico" id="txt_investEsporadico" />
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_investMensal"><strong>Investimento mensal</strong></label>
+                                                               <input type="text" class="form-control" name="txt_investMensal" id="txt_investMensal" />
+                                                            </div>
+
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_parcela"><strong>Parcela</strong></label>
+                                                               <input type="text" class="form-control" name="txt_parcela" id="txt_parcela" />
+                                                            </div>
+                                                         </div>
+
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                            </div>
+                                                            <div class="form-group col-md-3 comissao fs-display-none">
+                                                               <label for="txt_natureza"><strong>Tipo de Comissão</strong></label>
+                                                               <input type="hidden" class="form-control" name="txt_cdNatureza" id="txt_cdNatureza">
+                                                               <input type="zoom" class="form-control" name="txt_natureza" id="txt_natureza" 
+                                                                  data-zoom="{
+                                                                  'displayKey': 'ED_DESCRIC',
+                                                                  'datasetId': 'ds_naturezaProtheus',
+                                                                  'maximumSelectionLength':'1',
+                                                                  'fields': [
+                                                                  {
+                                                                  'field': 'ED_CODIGO',
+                                                                  'label': 'Código'
+                                                                  },														
+                                                                  {
+                                                                  'field': 'ED_DESCRIC',
+                                                                  'label': 'Nome',	
+                                                                  'standard': 'true',
+                                                                  'search': 'true'
+                                                                  }
+                                                                  ]
+                                                                  }"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 saldo fs-display-none">
+                                                               <label for="txt_seguradoraSaldo"><strong>Saldo</strong></label>
+                                                               <input type="text" class="form-control monetario" name="txt_seguradoraSaldo" id="txt_seguradoraSaldo" oninput="calcularSoma()"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 saldo fs-display-none">
+                                                               <label for="txt_seguradoraRentabilidade"><strong>Rentabilidade</strong></label>
+                                                               <input type="text" class="form-control monetario" name="txt_seguradoraRentabilidade" id="txt_seguradoraRentabilidade"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 resgate fs-display-none">
+                                                               <label for="txt_seguradoraResgate"><strong>Resgate</strong></label>
+                                                               <input type="text" class="form-control monetario" name="txt_seguradoraResgate" id="txt_seguradoraResgate" oninput="calcularSomaResgate()"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 comissao fs-display-none">
+                                                               <label for="txt_seguradoraComissao"><strong>Comissão</strong></label>
+                                                               <input type="text" class="form-control monetario" name="txt_seguradoraComissao" id="txt_seguradoraComissao" oninput="calcularSomaComissao()"/>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                            </div>
+                                                            <div class="form-group col-md-2 comissao fs-display-none">
+                                                               <label for="txt_premioTotal"><strong>Prêmio Total</strong></label>
+                                                               <input type="text" class="form-control monetario" name="txt_premioTotal" id="txt_premioTotal" />
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                               <label for="txt_seguradoraMesComp"><strong>Mês de Competência</strong></label>
+                                                               <input type="text" class="form-control campo-Data" name="txt_seguradoraMesComp" id="txt_seguradoraMesComp" autocomplete="off" mask="99/99/9999"/>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                               <label for="txt_seguradoraVencimento"><strong>Vencimento</strong></label>
+                                                               <input type="text" class="form-control campo-Data" name="txt_seguradoraVencimento" id="txt_seguradoraVencimento" autocomplete="off"/>
+                                                            </div>
+                                                            <div class="form-group col-md-3">
+                                                               <label for="txtHistoricoComissao"><strong>Histórico</strong></label>
+                                                               <textarea rows="5" cols="50"  class="form-control" name="txtHistoricoComissao" id="txtHistoricoComissao"></textarea>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row retornoProtheus">
+                                                            <div class="form-group col-md-2 fs-display-none">
+                                                               <label for="retornoProtheus"><strong>Retorno Protheus</strong></label>
+                                                               <input type="text" class="form-control retornoProtheus" name="retornoProtheus" id="retornoProtheus" readonly="readonly"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2 fs-display-none">
+                                                               <label for="codigoTitulo"><strong>Código do Título</strong></label>
+                                                               <input type="text" class="form-control retornoProtheus" name="codigoTitulo" id="codigoTitulo" readonly="readonly"/>
+                                                            </div>
+                                                         </div>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-2 col-md-offset-10 saldo">
+                                          <label for="valorTotal"><strong>Valor Total - Saldo</strong></label>
+                                          <input type="text" class="form-control" name="valorTotal" id="valorTotal" readonly/>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-2 col-md-offset-10 comissao">
+                                          <label for="valorTotalComissao"><strong>Valor Total - Comissão</strong></label>
+                                          <input type="text" class="form-control" name="valorTotalComissao" id="valorTotalComissao" readonly/>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-md-2 col-md-offset-10 resgate">
+                                          <label for="valorTotalResgate"><strong>Valor Total - Resgate</strong></label>
+                                          <input type="text" class="form-control" name="valorTotalResgate" id="valorTotalResgate" readonly/>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Início tabela propostas modelo NOVO -->
+                           <div class="panel panel-primary" id="painel_newProposta">
+                              <div class="panel-heading">
+                                 <h3 class="panel-title"> 
+                                    <b>Proposta</b>
+                                 </h3>
+                              </div>
+                              <div class="panel-body">
+                                 <div class="row">
+                                    <div class="col-md-5" id="botaoAddNewProposta">
+                                       <button type="button" id="btNovoItemNewProposta" name="btNovoItemNewProposta" class="btn btn-default  btn-info" onclick="addLinhaTbNew()" value="Novo">Inserir Proposta</button>
+                                    </div>
+                                    <div class="row ">
+                                       <div class="col-md-12">
+                                          <div class="table-responsive">
+                                             <table tablename="dadositensNewProposta" id="dadositensNewProposta" class="table table-hover" noaddbutton="true" nodeletebutton="true"  addbuttonclass="btn btn-default  btn-info" addbuttonlabel="Inserir Proposta">
+                                                <thead>
+                                                   <tr>
+                                                   </tr>
+                                                </thead>
+                                                <tbody id="tbody_dadositensNewProposta">
+                                                   <tr>
+                                                      <td>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                               <i class="btn btn-default btn-danger remove-child" onclick="Javascript:fnWdkRemoveChild(this);calcularSoma()">X</i>                                                                      
+                                                               <input type="hidden" name="seqLinhaNew" id="seqLinhaNew"/>
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                               <label for="txt_seguradoraProp"><strong>Seguradora</strong></label>
+                                                               <input type="hidden" class="form-control" name="txt_cdSeguradoraProp" id="txt_cdSeguradoraProp">
+                                                               <input type="zoom" class="form-control" name="txt_seguradoraProp" id="txt_seguradoraProp" 
+                                                                  data-zoom="{
+                                                                  'displayKey': 'A1_NOME',
+                                                                  'datasetId': 'ds_seguradorasProtheus',
+                                                                  'maximumSelectionLength':'1',
+                                                                  'fields': [
+                                                                  {
+                                                                  'field': 'A1_COD',
+                                                                  'label': 'Código'
+                                                                  },														
+                                                                  {
+                                                                  'field': 'A1_NOME',
+                                                                  'label': 'Nome',	
+                                                                  'standard': 'true',
+                                                                  'search': 'true'
+                                                                  }
+                                                                  ]
+                                                                  }"/>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_NewProposta"><strong>Proposta</strong></label>
+                                                               <input type="text" class="form-control" name="txt_NewProposta" id="txt_NewProposta" />
+                                                            </div>
+                                                             <div class="form-group col-xs-6 col-sm-4 col-md-2">
+                                                               <label class="control-label" for="fdPropostaNew">Anexo</label>
+                                                               <div class="componentAnexo">
+                                                                  <div class="input-group">
+                                                                     <input type="hidden" class="descAnexo" name="fdPropostaNew" id="fdPropostaNew" value="proposta" />
+                                                                     <input type="text" id="fnPropostaNew" name="fnPropostaNew" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                                  </div>
+                                                                  <div class="icones">
+                                                                     <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                                     <i class="fluigicon fluigicon-file-upload"></i>
+                                                                     </button>
+                                                                     <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                                     <i class="fluigicon fluigicon-eye-open"></i>
+                                                                     </button>
+                                                                     <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                                     <i class="fluigicon fluigicon-download"></i>
+                                                                     </button>
+                                                                  </div>
+                                                               </div>
+                                                            </div> 
+                                                            
+<!-- 															<div class="col-md-2">
+															    <div class="form-group">
+																    <label class="control-label required" for="Anexo_Minuta">Anexo</label>
+																        <input type="text" id="fnPropostaNew" name="fnPropostaNew" class="form-control anexo" placeholder="Selecione um arquivo" readonly="readonly" />
+																</div>
+															</div>
+															<div class="col-md-2">
+																<div class="form-group" style="margin-top: 22px;">
+														    		<input id="btnAnexo" name="btnAnexo" class="button-anexo" value="" title="Clique aqui para selecionar um arquivo" onclick="showCamera(this, 'fnPropostaNew');" type="submit" readonly="readonly" />
+														    		<input id="btnViewer" name="btnViewer" class="button-viewer" value="" title="Visualizar Arquivo" onclick="viewerAnexo(this, 'fnPropostaNew');" type="submit" />										    		
+														    		<input id="btnRemove" name="btnRemove" class="button-delete" value="" title="Remover Arquivo" onclick="removeAnexo(this, 'fnPropostaNew');" type="submit" />												
+																</div>
+															</div>  -->                                                           
+                                                            
+                                                            <div class="col-md-3 form-group">
+                                                               <label for="progressivo"><strong>Regime de Tributação</strong></label>
+                                                               <br/>
+                                                               <div class="radio">
+                                                                  <label>
+                                                                  <input type="radio" name="txt_proReg" id="progressivo" value="progressivo"><strong>Progressivo</strong>
+                                                                  </label>
+                                                               </div>
+                                                               <div class="radio">
+                                                                  <label>
+                                                                  <input type="radio" name="txt_proReg" id="regressivo" value="regressivo"><strong>Regressivo</strong>
+                                                                  </label>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">                                                                                
+                                                            </div>
+                                                            <div class="col-md-3"  style="margin-top: -11.4px;">
+                                                               <label class="radio">
+                                                                  <div class="radio-inline">
+                                                               <label>
+                                                               <input type="radio" name="txt_mensAportNew" id="txt_mensAportNew_mensalidade" value="mensalidade"><strong>Mensalidade</strong>
+                                                               </label>
+                                                               </div>
+                                                               <div class="radio-inline">
+                                                                  <label>
+                                                                  <input type="radio" name="txt_mensAportNew" id="txt_mensAportNew_aporte" value="aporte"><strong>Aporte</strong>
+                                                                  </label>
+                                                               </div>
+                                                               <input type="text" class="form-control monetario" id="txt_inptMensalAportNew" name="txt_inptMensalAportNew" style="margin-top: 4.6px;">
+                                                               </label>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_SaldoNew">Saldo</label>
+                                                               <input type="text" class="form-control monetario" name="txt_SaldoNew" id="txt_SaldoNew" />
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_VgblPgblNew">VGBL ou PGBL</label>
+                                                               <input type="text" class="form-control" name="txt_VgblPgblNew" id="txt_VgblPgblNew" />
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_FormPagNew">Forma de Pagamento</label>
+                                                               <select class="form-control" name="txt_FormPagNew" id="txt_FormPagNew">
+                                                                  <option value="" >Selecionar</option>
+                                                                  <option value="debito" >Débito</option>
+                                                                  <option value="boleto" >Boleto</option>
+                                                               </select>
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                               <label for="txt_dataConcessaoNew"><strong>Dt Concessão Benefício</strong></label>
+                                                               <input type="date" class="form-control" name="txt_dataConcessaoNew" id="txt_dataConcessaoNew" />
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">                                                                                
+                                                            </div>
+                                                            <div class="form-group col-md-2">                                             
+                                                               <button type="button" onclick="abrirModalFundo(this);" id="btn_incluir_fundo" name="btn_incluir_fundo" class="btn btn-default">Fundos</button>    
+                                                               <input type="hidden" class="form-control" id="jsonFundos" name="jsonFundos">
+                                                            </div>
+                                                            <div class="form-group col-md-2">                                            
+                                                               <button type="button" onclick="abrirModalBeneficiario(this);" id="btn_incluir_ben" name="btn_incluir_ben" class="btn btn-default">Beneficiários</button>     
+                                                               <input type="hidden" class="form-control" id="beneficiarioJson" name="beneficiarioJson">                                                                                                                                                          
+                                                            </div>
+                                                            <div class="col-md-2 form-group">
+                                                               <label for="cancelado"><strong>Status</strong></label>
+                                                               <br/>
+                                                               <div class="radio">
+                                                                  <label>
+                                                                  <input type="radio" name="statusProposta" id="cancelado" value="cancelado"><strong>Cancelado</strong>
+                                                                  </label>
+                                                               </div>
+                                                               <div class="radio">
+                                                                  <label>
+                                                                  <input type="radio" name="statusProposta" id="ativo" value="ativo"><strong>Ativo</strong>
+                                                                  </label>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-3">                                                                                
+                                                            </div>
+                                                            <div id="tableFundos" name="tableFundos" class="form-group col-md-6"> 
+                                                               <input type="hidden" class="form-control" id="controleFundos" name="controleFundos">                                                                                
+                                                            </div>
+                                                            <div class="form-group col-md-3">                                                                                
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-3">                                                                                
+                                                            </div>
+                                                            <div id="tableBene" name="tableBene" class="form-group col-md-6">
+                                                               <input type="hidden" class="form-control" id="controleBen" name="controleBen">                                                                                
+                                                            </div>
+                                                            <div class="form-group col-md-3">                                                                                
+                                                            </div>
+                                                         </div>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- Início tabela propostas -->
+                           <!-- <div class="panel panel-primary" id="painel_itens">
+                              <div class="panel-heading">
+                                  <h3 class="panel-title"> 
+                                      <b>Propostas</b>
+                                  </h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="form-group  table-responsive">
+                                      
+                                      <div id="botaoAddItens">
+                                          <button type="button" id="btNovoItem" name="btNovoItem" class="btn btn-default  btn-info" value="Novo">Inserir Proposta</button>
+                                      </div>	
+                              
+                                      <div class="col-md-12">
+                                          <table class="table table-condensed table-hover" id="main_dadositens">
+                                              <thead>
+                                                  <tr>
+                                                      <th class="col-md-1"></th>
+                                                      <th class="col-md-11"></th>
+                                                  </tr>
+                                              </thead>
+                                              <tbody></tbody>                			
+                                          </table>
+                                      </div>
+                              
+                                      <div class="row fs-display-none">
+                                          <div class="col-md-12">
+                                              <div class="table-responsive">
+                                                      
+                                                  <table tablename="dadositens" id="dadositens" class="table table-hover" noaddbutton="true" nodeletebutton="true" addbuttonclass="btn btn-default  btn-info" addbuttonlabel="Inserir Proposta">
+                                                      <thead>
+                                                          <tr>
+                                                              <td id="tdItens"></td>
+                                                              <td width="20%"><b>Proposta</b></td>
+                                                              <td width="10%"><b>Progressivo Regressivo</b></td>
+                                                              <td width="10%"><b>Mensalidade Aporte</b></td>
+                                                              <td width="10%"><b>Saldo</b></td>
+                                                              <td width="10%"><b>VGBL ou PGBL</b></td>
+                                                              <td width="10%"><b>Forma de Pagamento</b></td>
+                                                              <td width="10%"><b>Responsável</b></td>
+                                                              <td width="10%"><b>E-mail</b></td>
+                                                              <td width="10%"><b>Data de concessão de benefício</b></td>
+                                                          </tr>
+                                                      </thead>
+                                                      <tbody id="tbody_dadositens">
+                                                          <tr>
+                                                              <td id="tdDelItem">                                                                       
+                                                                  <i class="btn btn-default btn-danger remove-child" id="del_item" name="del_item" onclick="Javascript:fnWdkRemoveChild(this)">X</i>
+                                                                  <input type="text" name="filho_dadositens" id="filho_dadositens" />                                                                       
+                                                              </td>
+                                                              <td>
+                                                                  <input type="text" class="form-control" name="txt_proposta" id="txt_proposta" />
+                                                              </td>
+                                                              <td>
+                                                                  <label class="radio">
+                                                                      <div class="radio-inline">
+                                                                          <label>
+                                                                              <input type="radio" name="txt_proReg" id="mensalidade" value="progressivo"><strong>Progressivo</strong>
+                                                                          </label>
+                                                                      </div>
+                                                                      <div class="radio-inline">
+                                                                          <label>
+                                                                              <input type="radio" name="txt_proReg" id="aporte" value="regressivo"><strong>Regressivo</strong>
+                                                                          </label>
+                                                                      </div>
+                                                                  </label>
+                                                              </td>
+                              
+                                                              <td>
+                                                                  <label class="radio">
+                                                                      <div class="radio-inline">
+                                                                          <label>
+                                                                              <input type="radio" name="txt_mensAport" id="txt_mensAport" value="mensalidade"><strong>Mensalidade</strong>
+                                                                          </label>
+                                                                      </div>
+                                                                      <div class="radio-inline">
+                                                                          <label>
+                                                                              <input type="radio" name="txt_mensAport" id="txt_mensAport" value="aporte"><strong>Aporte</strong>
+                                                                          </label>
+                                                                      </div>
+                                                                      <input type="text" class="form-control" name="txt_inptMensalAport" id="txt_inptMensalAport" style="margin-top: 4.6px;">
+                                                                  </label>
+                                                              </td>
+                              
+                                                              <td>
+                                                                  <input type="text" class="form-control" id="txt_Saldo" name="txt_Saldo">
+                                                              </td>
+                              
+                                                              <td>
+                                                                  <input type="text" class="form-control" id="txt_VgblPgbl" name="txt_VgblPgbl">
+                                                              </td>
+                              
+                              <td>								
+                              <select class="form-control" name="txt_FormPag" id="txt_FormPag">
+                              <option value="" >Selecionar</option>
+                              <option value="debito" >Débito</option>
+                              <option value="boleto" >Boleto</option>
+                              </select>
+                              </td>
+                              
+                                                              <td>
+                                                                  <input type="text" class="form-control" id="txt_responsavel" name="txt_responsavel">
+                                                              </td>
+                              
+                                                              <td>
+                                                                  <input type="text" class="form-control" id="txt_email" name="txt_email">
+                                                              </td>
+                              
+                                                              <td>
+                                                                  <input type="text" class="form-control campo-Data" id="txt_dataConcessao" name="txt_dataConcessao">
+                                                              </td>
+                                                              <td>
+                                                                  <div class="col-xs-12 col-sm-6 col-md-4">
+                                                                      <div class="form-group">
+                                                                          <label class="control-label" for="fdProposta">Anexo</label>
+                                                                          <div class="componentAnexo">
+                                                                              <div class="input-group">
+                                                                                  <input type="hidden" class="descAnexo" name="fdProposta" id="fdProposta" value="proposta" />
+                                                                                  <input type="text" id="fnProposta" name="fnProposta" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                                              </div>
+                                                                              <div class="icones">
+                                                                                  <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                                                      <i class="fluigicon fluigicon-file-upload"></i>
+                                                                                  </button>
+                                                                                  <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                                                      <i class="fluigicon fluigicon-eye-open"></i>
+                                                                                  </button>
+                                                                                  <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                                                      <i class="fluigicon fluigicon-download"></i>
+                                                                                  </button>
+                                                                              </div>
+                                                                          </div>
+                                                                      </div>
+                                                                  </div>
+                                                              </td>
+                                                     
+                                                          </tr>
+                                                      </tbody>
+                                                  </table>
+                                              
+                                              </div>
+                                          </div>
+                                      </div>
+                              
+                                      <div class="row fs-display-none">
+                                       <div class="col-md-12">
+                                           <div class="table-responsive">
+                                               <table border="0" class="table table-striped table-bordered" tablename="dadositensmedicao" id="dadositensmedicao" nodeletebutton="true" noaddbutton="true" >
+                                                   <thead>
+                                                   <tr>
+                                                       <td></td>
+                                                       <td><b class="required">Fundo</b></td>
+                                                       <td><b class="required">Percentual de Aplicação</b></td>
+                                                   </tr>
+                                                   </thead>
+                                                   <tbody id="tbody_dadositensmedicao">
+                                                   <tr>
+                                                       <td>
+                                                           <input type="text" name="neto_dadositensmedicao" id="neto_dadositensmedicao"/>
+                                                           <i class="fluigicon fluigicon-trash fluigicon-md trash-componenteitem" onclick="Javascript:fnWdkRemoveChild(this)"></i>
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="" name="fundo_item" id="fundo_item" />
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="" name="percAplicacao_item" id="percAplicacao_item" />
+                                                       </td>
+                                                   </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                      </div>
+                                      
+                                      <div class="row fs-display-none">
+                                       <div class="col-md-12">
+                                           <div class="table-responsive">
+                                               <table border="0" class="table table-striped table-bordered" tablename="dadositensBeneficiarios" id="dadositensBeneficiarios" nodeletebutton="true" noaddbutton="true" >
+                                                   <thead>
+                                                   <tr>
+                                                       <td></td>
+                                                       <td><b class="required">Nome Beneficiário</b></td>
+                                                   </tr>
+                                                   </thead>
+                                                   <tbody id="tbody_dadositensBeneficiarios">
+                                                   <tr>
+                                                       <td>
+                                                           <input type="text" name="neto_dadositensBeneficiarios" id="neto_dadositensBeneficiarios"/>
+                                                           <i class="fluigicon fluigicon-trash fluigicon-md trash-componenteitem" onclick="Javascript:fnWdkRemoveChild(this)"></i>
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="" name="nomeBeneficiario_item" id="nomeBeneficiario_item" />
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="campo-data" name="nascBeneficario_item" id="nascBeneficario_item" />
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="" name="percentBeneficiario_item" id="percentBeneficiario_item" />
+                                                       </td>
+                                                       <td>
+                                                           <input type="text" class="" name="grauParentBeneficiario_item" id="grauParentBeneficiario_item" />
+                                                       </td>
+                                                   </tr>
+                                                   </tbody>
+                                               </table>
+                                           </div>
+                                       </div>
+                                      </div>
+                                      
+                                      	
+                                  </div>
+                              </div>
+                              </div> -->
+                           <!-- Fim tabela propostas -->
+                           <!-- <div class="panel panel-primary" id="panel_prodti" name="panel_prodti">
+                              <div class="panel-heading" style=" background-color: #006747;"><strong>Beneficiários</strong></div>
+                              
+                                  <div class="row form-group" style="padding-left: 10px; padding-top: 5;">
+                                      <div class="col-md-3">
+                                          <a class="btn btn-success" id="btn_incluirBeneficiario" name="btn_incluirBeneficiario" role="button">Incluir Beneficiário</a>
+                                      </div>
+                                  </div> 
+                                                      
+                                  <div class="panel-body">
+                                      
+                                          <table tablename="tableBeneficiarios" id="tableBeneficiarios" name="tableBeneficiarios" style="width:100%"noaddbutton="true" noDeleteButton="true">
+                              
+                                          <thead>
+                                              <tr>
+                                                  <th class="tableColumn" style="width:3%"></th>
+                                                  <th class="tableColumn" style="width:8%">ID</th>
+                                                  <th class="tableColumn" style="width:30%">Beneficiário</th>
+                                                  <th class="tableColumn" style="width:17%">Nascimento Beneficiário</th>
+                                                  <th class="tableColumn" style="width:12%">% Beneficiário</th>
+                                                  <th class="tableColumn" style="width:12%">Grau de Parentesco</th>
+                                              </tr>
+                                          </thead>
+                              
+                                          <tbody>
+                                              <tr>
+                                                  <td class="fs-v-align-middle" style="width:3%">
+                                                      <div id="div-trashItens" class="addProduto">
+                                                          <i class="flaticon flaticon-trash icon-md" onclick="fnCustomDeleteBeneficiario(this); autoClose:true;" style="cursor:pointer"></i>
+                                                      </div>
+                                                  </td>
+                              
+                                                  <td class="fs-v-align-middle" style="width:8%">
+                                                      <div class="form-input">
+                                                          <input type="text" name="idRow" id="idRow" class="form-control classIdRow" readonly>
+                                                      </div>
+                                                  </td>
+                              
+                                                  <td class="fs-v-align-middle" style="width:30%">
+                                                      <div class="form-input">
+                                                          <input type="text" name="benef" id="benef" class="form-control">
+                                                      </div>
+                                                  </td>
+                              
+                                                  <td class="fs-v-align-middle" style="width:17%">
+                                                      <div class="form-input">
+                                                          <input type="date" name="nascBenef" id="nascBenef" class="form-control">
+                                                      </div>
+                                                  </td>
+                                                  <td class="fs-v-align-middle" style="width:12%">
+                                                      <div class="form-input">
+                                                          <input type="text" name="porcentagemBenef" id="porcentagemBenef" class="form-control">
+                                                      </div>
+                                                  </td>
+                                                  <td class="fs-v-align-middle" style="width:12%">
+                                                      <div class="form-input">
+                                                          <input type="text" name="grauParent" id="grauParent" class="form-control">
+                                                      </div>
+                                                  </td>
+                                              </tr>
+                                          </tbody>
+                                      </table>
+                              
+                                  </div>
+                              </div> -->
+                           <!-- INÍCIO: Dados Bancários -->
+                           <div class="panel panel-primary" id="secDadosBancarios" name="secDadosBancarios">
+                              <div class="panel-heading">
+                                 <div>
+                                    <h3 style="font-weight: bold !important;" class="panel-title">Dados Bancários</h3>
+                                 </div>
+                              </div>
+                              <div class="panel-body">
+                                 <div class="row">
+                                    <div class="col-md-5" id="botaoAddBancario">
+                                       <button type="button" id="btNovoItemBancario" name="btNovoItemBancario" class="btn btn-default  btn-info" onclick="addLinhaTbBanco()" value="Novo">Inserir Dados Bancários</button>
+                                    </div>
+                                    <div class="row ">
+                                       <div class="col-md-12">
+                                          <div class="table-responsive">
+                                             <table tablename="dadositensBancarios" id="dadositensBancarios" class="table table-hover" noaddbutton="true" nodeletebutton="true"  addbuttonclass="btn btn-default  btn-info" addbuttonlabel="Inserir Seguradora">
+                                                <thead>
+                                                   <tr>                                                                                                                            
+                                                   </tr>
+                                                </thead>
+                                                <tbody id="tbody_dadosBancarios">
+                                                   <tr>
+                                                      <td>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                               <i class="btn btn-default btn-danger remove-child" onclick="Javascript:fnWdkRemoveChild(this);">X</i>                                                                      
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                               <label class="control-label" for="banco">Banco</label>
+                                                               <input type="hidden" class="form-control" name="idBanco" id="idBanco">
+                                                               <input type="zoom" class="form-control" name="banco" id="banco"
+                                                                  data-zoom="{
+                                                                  'displayKey': 'nomeBanco',
+                                                                  'datasetId': 'ds_bancos',
+                                                                  'maximumSelectionLength':'1',
+                                                                  'fields': [
+                                                                  {
+                                                                  'field': 'codigoBanco',
+                                                                  'label': 'Código'	
+                                                                  },                                                        
+                                                                  {
+                                                                  'field': 'nomeBanco',
+                                                                  'label': 'Nome',	
+                                                                  'standard': 'true',
+                                                                  'search': 'true'
+                                                                  }                                                             
+                                                                  ]
+                                                                  }">                                                                                
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-2">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="agencia">Agência</label>
+                                                                  <input type="text" class="form-control" name="agencia" id="agencia" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-3 col-md-2">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="digitoAgencia">Dígito Agência</label>
+                                                                  <input type="text" class="form-control" name="digitoAgencia" id="digitoAgencia" maxlength="1">
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <div class="form-group col-md-1">
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="conta">Conta</label>
+                                                                  <input type="text" class="form-control" name="conta" id="conta" maxlength="8" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-3 col-md-2">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="digitoConta">Dígito Conta</label>
+                                                                  <input type="text" class="form-control" name="digitoConta" id="digitoConta" maxlength="1">
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-3 col-md-2">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="tipoConta">Tipo de Conta</label>
+                                                                  <select class="form-control" id="tipoConta" name="tipoConta">
+                                                                     <option value="">Selecionar...</option>
+                                                                     <option value="corrente">Corrente</option>
+                                                                     <option value="poupanca">Poupança</option>
+                                                                     <option value="investimento">Investimento</option>
+                                                                  </select>
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                         <div class="row">
+                                                            <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                                                               <div class="form-group">
+                                                                   <label class="control-label" for="formaPagDB">Forma de Pagamento</label>
+                                                                   <select class="form-control" id="formaPagDB" name="formaPagDB">
+                                                                       <option value="">Selecionar...</option>
+                                                                       <option value="D">DOC (Comp)</option>
+                                                                       <option value="T">Crédito em Conta Corrente no mesmo Banco</option>
+                                                                       <option value="C">Cheque Administrativo</option>
+                                                                       <option value="I">Título de Cobrança (Boleto)</option>
+                                                                       <option value="N">Pagamento Eletrônico a Concessionários</option>
+                                                                       <option value="P">Crédito em Conta de Poupança</option>
+                                                                       <option value="R">Ordem de Pagamento à disposição</option>
+                                                                       <option value="X">Crédito em Conta Real Time</option>
+                                                                       <option value="Y">TED</option>
+                                                                       <option value="Z">TEF</option>
+                                                                       <option value="A">DARF</option>
+                                                                       <option value="G">GPS</option>
+                                                                       <option value="E">Débito Automático</option>
+                                                                       <option value="M">Crédito em Conta Corrente de Mesma Titularidade</option>
+                                                                       <option value="B">IPTU/ISS/Outros Tributos Municipais</option>
+                                                                       <option value="F">DARJ</option>
+                                                                       <option value="J">GARE - SP ICMS</option>
+                                                                       <option value="L">FGTS - GFIP</option>
+                                                                       <option value="O">GNRE e Tributos Estaduais c/ Cód. Barras</option>
+                                                                       <option value="S">PIX Transferência</option>
+                                                                   </select>
+                                                               </div>
+                                                               </div> -->
+                                                            <div class="col-xs-12 col-sm-6 col-md-2" id="divTipoChave" name="divTipoChave" style="display: none;">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="tipoPix">Tipo de Chave</label>
+                                                                  <select class="form-control" id="tipoPix" name="tipoPix">
+                                                                     <option value="">Selecionar...</option>
+                                                                     <option value="aleatoria">Aleatória</option>
+                                                                     <option value="email">E-mail</option>
+                                                                     <option value="cnpjCnpj">CPF/CNPJ</option>
+                                                                     <option value="telefone">Telefone</option>
+                                                                  </select>
+                                                               </div>
+                                                            </div>
+                                                            <div class="col-xs-12 col-sm-6 col-md-2" id="divChavePix" name="divChavePix" style="display: none;">
+                                                               <div class="form-group">
+                                                                  <label class="control-label" for="chavePix">Chave Pix</label>
+                                                                  <input type="text" class="form-control" name="chavePix" id="chavePix">
+                                                               </div>
+                                                            </div>
+                                                         </div>
+                                                      </td>
+                                                   </tr>
+                                                </tbody>
+                                             </table>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                           <!-- FINAL: Dados Bancários -->
+                        </section>
+                        <!-- FINAL: informações do solicitante -->
+                     </div>
+                  </div>
+                  <!-- INÍCIO: campos ocultos do formulário -->
+                  <section class="secCamposHidden" id="secCamposHidden" style="display:none;">
+                     <input type="hidden" name="teste">
+                  </section>
+                  <!-- FINAL: campos ocultos do formulário -->
+               </div>
+            </div>
+         </form>
+         <!-- FINAL: formulário geral -->
+      </div>
+      <!-- script abaixo controla o botão que apaga o CPF/CNPJ -->
+      <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+      <script type="text/template" class="tpl-fundos">
+         <div class="row">                                                                                
+           <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+               <div class="form-group">                                                                 
+                   <label class="control-label" for="nomeFundo">Fundo</label>                           
+                   <input type="text" class="form-control" id ="nomeFundo" name="nomeFundo" >           
+               </div>                                                                                   
+           </div>                                                                                       
+           <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+               <div class="form-group">                                                                 
+                   <label class="control-label" for="percentualFundo">Percentual Fundo</label>          
+                   <input type="text" class="form-control" id="percentualFundo" name="percentualFundo" data-mask="##0,00%">
+               </div>                                                                                   
+           </div>                                                                                       
+           <div class="col-xs-12 col-sm-12 col-md-12">                                                      			
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-success" id="adicionarFundo" data-adicionar-fundo>Adicionar</button>
+             </div>                                                                                     
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-primary" id="editarFundo" data-editar-fundo>Editar</button>     
+             </div>                                                                                     
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-danger" id="excluirFundo" data-excluir-fundo>Excluir</button>     
+             </div>                                                                                     			
+           </div>                                                                                       			
+           <div class="col-xs-12 col-sm-12 col-md-12">                                                  
+               <div id="target"></div>                                                                  			
+           </div>                                                                                       			
+         </div>                                                                                         
+      </script>
+      <script type="text/template" class="tpl-beneficiario">
+         <div class="row">                                                                                
+           <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+               <div class="form-group">                                                                 
+                   <label class="control-label" for="nomeBen">Nome</label>                           
+                   <input type="text" class="form-control" id ="nomeBen" name="nomeBen" >           
+               </div>                                                                                   
+           </div>                                                                                       
+           <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+               <div class="form-group">                                                                 
+                   <label class="control-label" for="nascimento">Dt Nascimento</label>          
+                   <input type="text" class="form-control campo-Data" id="nascimento" name="nascimento" >
+               </div>                                                                                   
+           </div>     
+           <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+             <div class="form-group">                                                                 
+                 <label class="control-label" for="porcentagem">% Beneficiário</label>                           
+                 <input type="text" class="form-control" id ="porcentagem" name="porcentagem" >           
+             </div>                                                                                   
+             </div>                                                                                       
+             <div class="col-xs-12 col-sm-6 col-md-6">                                                    
+                 <div class="form-group">                                                                 
+                     <label class="control-label" for="parentesco">Grau de Parentesco</label>          
+                     <input type="text" class="form-control" id="parentesco" name="parentesco" >
+                 </div>                                                                                   
+             </div>                                                                                    
+             <div class="col-xs-12 col-sm-12 col-md-12">                                                      			
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-success" id="adicionarFundo" data-adicionar-fundo>Adicionar</button>
+             </div>                                                                                     
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-primary" id="editarFundo" data-editar-fundo>Editar</button>     
+             </div>                                                                                     
+             <div class="col-sm-3 col-md-3">                                                                     
+                 <button class="btn btn-danger" id="excluirFundo" data-excluir-fundo>Excluir</button>     
+             </div>                                                                                     			
+           </div>                                                                                       			
+           <div class="col-xs-12 col-sm-12 col-md-12">                                                  
+               <div id="target"></div>                                                                  			
+           </div>                                                                                       			
+         </div>                                                                                         
+      </script>
+   </body>
+</html>

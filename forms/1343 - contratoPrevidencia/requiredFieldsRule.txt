@@ -1,0 +1,107 @@
+/**
+ * Carrega regra de campos obrigatórios
+ * @returns void.
+ */
+function requiredFieldsRule(){
+	$("<style>").prop("type", "text/css")
+		.html("\
+			.required::before{\
+				content: '*';\
+				color: red;\
+			}").appendTo("head");
+	$('label').removeClass('required');
+	requiredFields = new Fields();
+	var fields = [];
+
+	requiredFields.addField("rdTipoInclusaoProposta",[INICIO, INICIO_0, TRATAR_ERRO]);	
+	
+	if($("input[name='rdTipoInclusao']:checked").val() != "anexo"){
+	
+		requiredFields.addField("zoomEmpresaProtheus",[INICIO, INICIO_0, TRATAR_ERRO]);	
+		
+	}
+	
+	requiredFields.addField("zoomNomeCompleto",[INICIO, INICIO_0, TRATAR_ERRO]);	
+	requiredFields.addField("zoomcpfCnpj",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("dataNascimento",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("cep",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("rua",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("bairro",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("numero",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("cidade",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("uf",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("emailComercial",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("situacao",[INICIO, INICIO_0, TRATAR_ERRO]);
+	//requiredFields.addField("situacao",[INICIO, INICIO_0]);
+	
+	if($("input[name='rdTipoInclusao']:checked").val() == "proposta"){
+		
+		requiredFields.addField("rdMenorIdadeSim",[INICIO, INICIO_0, TRATAR_ERRO]);
+		
+		if($("input[name='rdMenorIdade']:checked").val() == "sim"){
+			
+			requiredFields.addField("nomeResponsavelMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("cpfResponsavelMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("dtNasRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("parentescoMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("ruaRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("bairroRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("numeroRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("cidadeRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			requiredFields.addField("ufRespMenor",[INICIO, INICIO_0, TRATAR_ERRO]);
+			
+		}
+				
+		requiredFields.addField("txt_seguradoraProp___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_NewProposta___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("progressivo___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("cancelado___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("tableValueMouApt___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("tableSaldo___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_VgblPgblNew___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_FormPagNew___",[INICIO, INICIO_0, TRATAR_ERRO]);			
+		
+	}
+	
+
+	
+	if($("input[name='rdTipoInclusao']:checked").val() == "saldo"){
+		
+		requiredFields.addField("txt_seguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);	
+		requiredFields.addField("txt_propostaSeguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraSaldo___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraRentabilidade___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraMesComp___",[INICIO, INICIO_0, TRATAR_ERRO]);	
+		
+	}else if($("input[name='rdTipoInclusao']:checked").val() == "comissao"){
+		
+		requiredFields.addField("txt_seguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_propostaSeguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_natureza___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraComissao___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_premioTotal___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraMesComp___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraVencimento___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		
+	}else if($("input[name='rdTipoInclusao']:checked").val() == "resgate"){
+		
+		requiredFields.addField("txt_seguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_propostaSeguradora___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraResgate___",[INICIO, INICIO_0, TRATAR_ERRO]);
+		requiredFields.addField("txt_seguradoraMesComp___",[INICIO, INICIO_0, TRATAR_ERRO]);	
+		
+	}
+	
+	requiredFields.addField("banco___",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("agencia___",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("digitoAgencia___",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("conta___",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("digitoConta___",[INICIO, INICIO_0, TRATAR_ERRO]);
+	requiredFields.addField("tipoConta___",[INICIO, INICIO_0, TRATAR_ERRO]);		
+
+	fields = requiredFields.getFields();
+	for(var i=0;i<fields.length; i++){
+		if(fields[i].activities.indexOf(CURRENT_STATE)>= 0)
+			setRequired(fields[i].name, true);
+	}
+}

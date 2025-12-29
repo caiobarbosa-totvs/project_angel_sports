@@ -1,0 +1,942 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	<script src="/webdesk/vcXMLRPC.js"></script>
+	
+	<script type="text/javascript" src="atividades.js"></script>
+	<script type="text/javascript" src="requiredFieldsRule.js"></script>
+	<script type="text/javascript" src="beforeSendValidate.js"></script>	
+	
+	<link type="text/css" rel="stylesheet" href="style.css"/>
+	<script type="text/javascript" src="anexos.js" charset="utf-8"></script>
+	<script type="text/javascript" src="cadastroClientes.js"></script>
+	
+</head>
+<body>
+	<div class="fluig-style-guide">
+        <!-- INÍCIO: formulário geral -->
+        <form class="modForm" role="form" name="frm" id="frm">
+
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+
+                    <!-- INÍCIO: título de cabeçalho -->
+                    <div class="panel-heading css_heading vertical-center">
+                        <div class="panel-body">
+                            <div class="row ">
+
+                                <div class="col-md-12 col-xs-12">
+
+                                    <div class="col-md-6">
+                                        <img src="logo-Angel-Sports.png" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h1 style="font-size: 20px; color: white; font-weight: bold; padding-left: 5px;">Cadastro de Clientes</h1>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FINAL: título de cabeçalho -->
+
+                    <br/><br/>
+
+                    <!-- INÍCIO: informações da solicitação -->
+                    <div class="panel panel-primary" id="secInformacoes" name="secInformacoes">
+					
+                        <div class="panel-heading">
+                            <div>
+                                <h3 style="font-weight: bold !important;" class="panel-title">Informações Gerais <input class="inputTransparent" type="text" name="tipoPessoaFJ" id="tipoPessoaFJ" value="" readOnly></h3>
+                            </div>
+                        </div>
+    
+                        <div class="panel-body">
+
+                            <!-- INÍCIO: informações do solicitante -->
+                            <section class="secSolicitante" id="secSolicitante">
+
+                                <div class="row">
+                                                        
+                                    <div class="col-md-6 col-xs-12" style="font-size: 11;">
+                                        <div class="col-md-4">
+                                            <label for="processNumber" style="font-size: 15px;"><b>Nº Solicitação:</b></label>
+                                            <input class="form-control inputTransparent2" type="text" id="processNumber" name="processNumber" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="nameUserCreation" style="font-size: 15px;"><b>Usuário:</b></label>									
+                                            <input class="form-control inputTransparent2" type="text" id="nameUserCreation" name="nameUserCreation" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="creationDate" style="font-size: 15px;"><b>Data Cadastral:</b></label>					
+                                            <input style="font-size: 15px;" class="form-control campo-data" type="text" id="creationDate" name="creationDate" />
+                                        </div>
+                                    </div>                            
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label" for="rdClienteNovoS">Cliente novo?</label>
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rdClienteNovo" id="rdClienteNovoS" value="sim">Sim
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rdClienteNovo" id="rdClienteNovoN" value="nao">Não
+                                                    </label>                                                                                                        
+                                                </div>
+
+                                            </label>
+                                        </div>
+                                    </div> 
+                                    <div class="col-xs-12 col-sm-3 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="catCliente">Categoria Cliente</label>
+                                            <select class="form-control" id="catCliente" name="catCliente">
+                                                <option value="">Selecionar...</option>
+                                                <option value="1">Contratante</option>
+                                                <option value="2">Parceiro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-sm-3 col-md-3 fs-display-none">
+                                            <label class="control-label" for="catCliente">Retorno Protheus</label>
+                                            <input type="text" class="form-control" name="retornoProtheus" id="retornoProtheus" readonly="readonly">
+                                    </div>                                    
+                                    
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nomeSolicitante">Nome do Solicitante</label>
+                                            <input type="text" class="form-control" id ="nomeSolicitante" name="nomeSolicitante" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="emailSolicitante">E-mail do Solicitante</label>
+                                            <input type="text" class="form-control" id="emailSolicitante" name="emailSolicitante" readonly>
+                                        </div>
+                                    </div>
+                                   <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="orgemSolic">Origem</label>
+                                            <input type="text" class="form-control" id="orgemSolic" name="orgemSolic">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 clienteNovo" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nomeCompleto">Nome Cliente</label>
+                                            <input type="text" class="form-control caixa_alta" id="nomeCompleto" name="nomeCompleto">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 clienteNovo" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cpfCnpj">CPF/CNPJ</label>
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" name="cpfCnpj" id="cpfCnpj" maxlength="14" onkeypress="return event.charCode >= 48 && event.charCode <= 57" >
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" id="btnLimpar" name="btnLimpar">
+                                                        <span class="fas fa-ban"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4 clienteJahCadastrado" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomNomeCompleto">Nome Cliente</label>
+                                            <input type="zoom" class="form-control" id="zoomNomeCompleto" name="zoomNomeCompleto"
+                                                data-zoom="{
+                                                        'displayKey': 'A1_NOME',
+                                                        'datasetId': 'ds_listaClientesProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                            {
+                                                               'field': 'A1_NOME',
+                                                               'label': 'Nome',	
+                                                               'standard': 'true',
+                                                               'search': 'true'
+                                                            },
+                                                            {
+                                                                'field': 'A1_COD',
+                                                                'label': 'Código'
+                                                            },
+                                                            {
+                                                                'field': 'A1_CGC',
+                                                                'label': 'CPF/CNPJ'
+                                                            },
+                                                            {
+                                                                'field': 'A1_LOJA',
+                                                                'label': 'Loja',
+                                                                'visible': 'true'
+                                                            }
+                                                        ]
+                                                }"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 clienteJahCadastrado" style="display: none;">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomcpfCnpj">CPF/CNPJ</label>
+                                            <input type="zoom" class="form-control" id="zoomcpfCnpj" name="zoomcpfCnpj" 
+												data-zoom="{
+                                                        'displayKey': 'A1_CGC',
+                                                        'datasetId': 'ds_listaClientesProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                           {
+                                                               'field': 'A1_NOME',
+                                                               'label': 'Nome'
+                                                            },
+                                                            {
+                                                                'field': 'A1_COD',
+                                                                'label': 'Código'
+                                                             },
+                                                             {
+                                                                'field': 'A1_CGC',
+                                                                'label': 'CPF/CNPJ',	
+                                                               'standard': 'true',
+                                                               'search': 'true'
+                                                             },
+                                                             {
+                                                                'field': 'A1_LOJA',
+                                                                'label': 'Loja',
+                                                                'visible': 'false'
+                                                             }
+                                                         ]
+                                               }"                                            
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <!-- <section class="secPessoaFisica" style="display: none;">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="CNPJ">Nome Completo</label>
+                                                <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto">
+                                            </div>
+                                        </div>
+    
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="CNPJ">Nascimento</label>
+                                                <input type="text" class="form-control" id="dataNascimento" name="dataNascimento">
+                                            </div>
+                                        </div>
+                                    </section> -->
+                                    
+                                </div>
+
+                                <!-- Início Pessoa Física -->
+                                <div class="row secPessoaFisica" style="display: none;">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataNascimento">Nascimento</label>
+                                            <input type="text" class="form-control" id="dataNascimento" name="dataNascimento">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="enderecoExt">Endereço Exterior</label>
+                                            <input type="text" class="form-control" id="enderecoExt" name="enderecoExt">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nifIcamaIdEstrangeiro">NIF/ICAMA/ID ESTRANGEIRO</label>
+                                            <input type="text" class="form-control" id="nifIcamaIdEstrangeiro" name="nifIcamaIdEstrangeiro">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row secPessoaFisica" style="display: none;">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">RG</label>
+                                            <div class="componentAnexo">
+                                                <div class="input-group">
+                                                    <input type="hidden" class="descAnexo" name="fdRg" value="RG" />
+                                                    <input type="text" id="fnRg" name="fnRg" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                </div>
+                                                <div class="icones">
+                                                    <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                        <i class="fluigicon fluigicon-file-upload"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                        <i class="fluigicon fluigicon-eye-open"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                        <i class="fluigicon fluigicon-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="numeroRg">Numeração RG</label>
+                                            <input type="text" class="form-control" id="numeroRg" name="numeroRg">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataVencRg">Data Vencimento RG</label>
+                                            <input type="text" class="form-control" id="dataVencRg" name="dataVencRg">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row secPessoaFisica" style="display: none;">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Passaporte</label>
+                                            <div class="componentAnexo">
+                                                <div class="input-group">
+                                                    <input type="hidden" class="descAnexo" name="fdPassaporte" value="Passaporte" />
+                                                    <input type="text" id="fnPassaporte" name="fnPassaporte" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                </div>
+                                                <div class="icones">
+                                                    <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                        <i class="fluigicon fluigicon-file-upload"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                        <i class="fluigicon fluigicon-eye-open"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                        <i class="fluigicon fluigicon-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="numPassaporte">Numeração Passaporte</label>
+                                            <input type="text" class="form-control" id="numPassaporte" name="numPassaporte">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataVencPassaporte">Data Vencimento Passaporte</label>
+                                            <input type="text" class="form-control" id="dataVencPassaporte" name="dataVencPassaporte">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row secPessoaFisica" style="display: none;">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Contrato de Trabalho</label>
+                                            <div class="componentAnexo">
+                                                <div class="input-group">
+                                                    <input type="hidden" class="descAnexo" name="fdContratoTrab" value="Contrato de Trabalho" />
+                                                    <input type="text" id="fnContratoTrab" name="fnContratoTrab" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                </div>
+                                                <div class="icones">
+                                                    <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                        <i class="fluigicon fluigicon-file-upload"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                        <i class="fluigicon fluigicon-eye-open"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                        <i class="fluigicon fluigicon-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataInicioCt">Data de Início</label>
+                                            <input type="text" class="form-control" id="dataInicioCt" name="dataInicioCt">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataFimCt">Data Fim do Contrato</label>
+                                            <input type="text" class="form-control" id="dataFimCt" name="dataFimCt">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row secPessoaFisica" style="display: none;">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="conjuge">Cônjuge</label>
+                                            <input type="text" class="form-control caixa_alta" id="conjuge" name="conjuge">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataNascConjuge">Data de Nascimento - Cônjuge</label>
+                                            <input type="text" class="form-control" id="dataNascConjuge" name="dataNascConjuge">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cpfConjuge">CPF - Cônjuge</label>
+                                            <input type="text" class="form-control" id="cpfConjuge" name="cpfConjuge" mask="000.000.000-00">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="saidaDefinitiva">Saída Definitiva</label>
+                                            <input type="text" class="form-control" id="saidaDefinitiva" name="saidaDefinitiva">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- Fim Pessoa Física -->
+
+                                <!-- Início Pessoa Jurídica -->
+                                <div class="row secPessoaJuridica" style="display: none;">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="razaoSocial">Razão Social</label>
+                                            <input type="text" class="form-control caixa_alta" id="razaoSocial" name="razaoSocial">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cnae">CNAE</label>
+                                            <input type="text" class="form-control" id="cnae" name="cnae">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataAbertura">Data Abertura</label>
+                                            <input type="text" class="form-control" id="dataAbertura" name="dataAbertura">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row secPessoaJuridica">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="socioMarjoritario">Sócio Marjoritário</label>
+                                            <input type="text" class="form-control caixa_alta" id="socioMarjoritario" name="socioMarjoritario">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cpfMarjoritario">CPF Marjoritario</label>
+                                            <input type="text" class="form-control" id="cpfMarjoritario" name="cpfMarjoritario" mask="000.000.000-00">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="enderecoSocio">Endereço Sócio</label>
+                                            <input type="text" class="form-control caixa_alta" id="enderecoSocio" name="enderecoSocio">
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- Fim Pessoa Jurídica -->
+
+                                <!-- Início Campos comuns entre pf e pj -->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cep">CEP</label>
+                                            <input type="text" class="form-control" id="cep" name="cep" maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onblur="pesquisacep(this.value);">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="rua">Rua</label>
+                                            <input type="text" class="form-control" id="rua" name="rua">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="numero">Número</label>
+                                            <input type="text" class="form-control" id="numero" name="numero">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bairro">Bairro</label>
+                                            <input type="text" class="form-control" id="bairro" name="bairro">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomUf">Estado</label>
+                                            <input type="zoom" class="form-control" id="zoomUf" name="zoomUf"
+                                                data-zoom="{
+                                                            'displayKey': 'nomeCompleto',
+                                                            'datasetId': 'ds_cadClientes',
+                                                            'maximumSelectionLength':'1',
+                                                            'fields': [
+                                                            {
+                                                                'field': 'nomeCompleto',
+                                                                'label': 'Nome',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                                }
+                                                            ]
+                                                }"
+                                            />
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="uf">Estado</label>
+                                            <input type="hidden" class="form-control" id="codUF" name="codUF">
+                                            <input type="zoom" class="form-control" id="uf" name="uf"
+												data-zoom="{
+                                                        'displayKey': 'X5_DESCRI',
+                                                        'datasetId': 'ds_estadoProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                                {
+                                                                'field': 'X5_CHAVE',
+                                                                'label': 'Código'
+                                                                },                                                        
+                                                            {
+                                                                'field': 'X5_DESCRI',
+                                                                'label': 'Descrição',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            }
+                                                            ]
+                                                }">
+                                        </div>
+                                    </div> 
+
+                                    <!-- <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="municip">Município</label>
+                                            <input type="text" class="form-control" id="municip" name="municip" readonly>
+                                            <input type="hidden" class="form-control" id="codMun" name="codMun" readonly>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="municip">Cidade</label>
+                                            <input type="hidden" class="form-control" id="codMun" name="codMun">
+                                            <input type="zoom" class="form-control" id="municip" name="municip"
+												data-zoom="{
+                                                        'displayKey': 'CC2_MUN',
+                                                        'datasetId': 'ds_municipioProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                                {
+                                                                'field': 'CC2_CODMUN',
+                                                                'label': 'Código'
+                                                                },                                                        
+                                                            {
+                                                                'field': 'CC2_MUN',
+                                                                'label': 'Descrição',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            }
+                                                            ]
+                                                }">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="ddi">DDI</label>
+                                            <input type="text" class="form-control" id="ddi" name="ddi">
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="municip">DDI</label>
+                                            <input type="hidden" class="form-control" id="codDDI" name="codDDI">
+                                            <input type="zoom" class="form-control" id="DDI" name="DDI"
+												data-zoom="{
+                                                        'displayKey': 'ACJ_PAIS',
+                                                        'datasetId': 'ds_DDIProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                                {
+                                                                'field': 'ACJ_DDI',
+                                                                'label': 'Código'
+                                                                },                                                        
+                                                            {
+                                                                'field': 'ACJ_PAIS',
+                                                                'label': 'País',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            }
+                                                            ]
+                                                }">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="iban">IBAN</label>
+                                            <input type="text" class="form-control" id="iban" name="iban" maxlength="30">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="bancoIdent">Banco Identificador</label>
+                                            <input type="text" class="form-control" id="bancoIdent" name="bancoIdent">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="spreadAcordado">Spread Acordado</label>
+                                            <input type="text" class="form-control monetario" id="spreadAcordado" name="spreadAcordado">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="responsavel">Responsável</label>
+                                            <input type="text" class="form-control" id="responsavel" name="responsavel">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="telefoneBrasil">Telefone Brasil</label>
+                                            <input type="text" class="form-control" id="telefoneBrasil" name="telefoneBrasil" mask="(00) 00000-0000">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="telefoneExterior">Telefone Exterior</label>
+                                            <input type="text" class="form-control" id="telefoneExterior" name="telefoneExterior" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3 validaErro">
+                                        <div class="form-group">
+                                            <label class="control-label" for="email">E-mail</label>
+                                            <input type="text" class="form-control" id="email" name="email" onblur="validacaoEmail(this);">
+                                            <div style="border:none; background-color: transparent;" class="form-control classMsgemail" name="msgemail"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Fim Campos comuns entre pf e pj -->
+
+                                <!-- <section class="secPessoaFisica" style="display: none;">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label" for="cidade">Cidade - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="cidade" name="cidade" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="uf">Estado - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="uf" name="uf" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="iban">IBAN</label>
+                                                <input type="text" class="form-control" id="iban" name="iban" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="bancoIdent">Banco Identificador</label>
+                                                <input type="text" class="form-control" id="bancoIdent" name="bancoIdent">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="spreadAcordado">Spread Acordado</label>
+                                                <input type="text" class="form-control" id="spreadAcordado" name="spreadAcordado">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section> -->
+
+                                <!-- <section class="secPessoaJuridica" style="display: none;">
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="cepPj">CEP - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="cepPj" name="cepPj" maxlength="9" onkeypress="return event.charCode >= 48 && event.charCode <= 57" onblur="pesquisacep(this.value);">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label" for="ruaPj">Rua - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="ruaPj" name="ruaPj" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="bairroPj">Bairro - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="bairroPj" name="bairroPj" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="numeroPj">Nº - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="numeroPj" name="numeroPj">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-5">
+                                            <div class="form-group">
+                                                <label class="control-label" for="cidadePj">Cidade - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="cidadePj" name="cidadePj" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="ufPj">Estado - Endereço Brasil</label>
+                                                <input type="text" class="form-control" id="ufPj" name="ufPj" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="ibanPJurica">IBAN</label>
+                                                <input type="text" class="form-control" id="ibanPJurica" name="ibanPJurica" maxlength="30">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="bancoIdentPJurica">Banco Identificador</label>
+                                                <input type="text" class="form-control" id="bancoIdentPJurica" name="bancoIdentPJurica">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-4">
+                                            <div class="form-group">
+                                                <label class="control-label" for="spreadAcordadoPJuridica">Spread Acordado</label>
+                                                <input type="text" class="form-control" id="spreadAcordadoPJuridica" name="spreadAcordadoPJuridica">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="responsavelPJurica">Responsável</label>
+                                                <input type="text" class="form-control" id="responsavelPJurica" name="responsavelPJurica">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="telefoneBrasilPJuridica">Telefone Brasil</label>
+                                                <input type="text" class="form-control" id="telefoneBrasilPJuridica" name="telefoneBrasilPJuridica" mask="(00) 00000-0000">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label" for="telefoneExteriorPJuridica">Telefone Exterior</label>
+                                                <input type="text" class="form-control" id="telefoneExteriorPJuridica" name="telefoneExteriorPJuridica">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 col-md-3 validaErro">
+                                            <div class="form-group">
+                                                <label class="control-label" for="emailPJuridica">E-mail</label>
+                                                <input type="text" class="form-control" id="emailPJuridica" name="emailPJuridica" onblur="validacaoEmail(this);">
+                                                <div style="border:none; background-color: transparent;" class="form-control classMsgemail" name="msgemailPJuridica"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </section> -->
+
+                                <div class="row secObservacoes">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="observacoes">Observações</label>
+                                            <textarea class="form-control" rows="3" id="observacoes" name="observacoes"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- FINAL: informações do solicitante -->
+                        </div>
+                    </div>
+                    <!-- INÍCIO: Dados Bancários -->
+                    <div class="panel panel-primary" id="secDadosBancarios" name="secDadosBancarios">
+                        <div class="panel-heading">
+                            <div>
+                                <h3 style="font-weight: bold !important;" class="panel-title">Dados Bancários</h3>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">                                            
+                                <div class="col-md-5" id="botaoAddBancario">
+                                    <button type="button" id="btNovoItemBancario" name="btNovoItemBancario" class="btn btn-default  btn-info" onclick="addLinhaTbBanco()" value="Novo">Inserir Dados Bancários</button>
+                                </div>	
+                                <div class="row ">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive">                                                            
+                                            <table tablename="dadositensBancarios" id="dadositensBancarios" class="table table-hover" noaddbutton="true" nodeletebutton="true"  addbuttonclass="btn btn-default  btn-info" addbuttonlabel="Inserir Seguradora">
+                                                <thead>
+                                                    <tr>                                                                                                                            
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbody_dadosBancarios">
+                                                    <tr>
+                                                        <td>                                                                      
+                                                            <div class="row">   
+                                                            
+                                                                <div class="form-group col-md-1">
+                                                                    <i class="btn btn-default btn-danger remove-child" onclick="Javascript:fnWdkRemoveChild(this);">X</i>                                                                      
+                                                                </div>                                                                         
+                                                            
+                                                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                                                    <label class="control-label" for="banco">Banco</label>
+                                                                    <input type="hidden" class="form-control" name="idBanco" id="idBanco">
+                                                                    <input type="zoom" class="form-control" name="banco" id="banco"
+                                                                    data-zoom="{
+                                                                            'displayKey': 'nomeBanco',
+                                                                            'datasetId': 'ds_bancos',
+                                                                            'maximumSelectionLength':'1',
+                                                                            'fields': [
+                                                                                {
+                                                                                    'field': 'codigoBanco',
+                                                                                    'label': 'Código'	
+                                                                                },                                                        
+                                                                                {
+                                                                                    'field': 'nomeBanco',
+                                                                                    'label': 'Nome',	
+                                                                                    'standard': 'true',
+                                                                                    'search': 'true'
+                                                                                }                                                             
+                                                                                ]
+                                                                    }">                                                                                
+                                                                </div>
+
+                                                                <div class="col-xs-12 col-sm-6 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label" for="agencia">Agência</label>
+                                                                        <input type="text" class="form-control" name="agencia" id="agencia" maxlength="4" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12 col-sm-3 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label" for="digitoAgencia">Dígito Agência</label>
+                                                                        <input type="text" class="form-control" name="digitoAgencia" id="digitoAgencia" maxlength="1">
+                                                                    </div>
+                                                                </div>
+
+                                                                </div>
+                                                                <div class="row">  
+                                                                
+                                                                <div class="form-group col-md-1">
+                                                                </div>
+                                                                
+                                                                <div class="col-xs-12 col-sm-6 col-md-3">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label" for="conta">Conta</label>
+                                                                        <input type="text" class="form-control" name="conta" id="conta" maxlength="8" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xs-12 col-sm-3 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label" for="digitoConta">Dígito Conta</label>
+                                                                        <input type="text" class="form-control" name="digitoConta" id="digitoConta" maxlength="1">
+                                                                    </div>
+                                                                </div>                                                                         	
+                                                                
+                                                                <div class="col-xs-12 col-sm-3 col-md-2">
+                                                                    <div class="form-group">
+                                                                        <label class="control-label" for="tipoConta">Tipo de Conta</label>
+                                                                        <select class="form-control" id="tipoConta" name="tipoConta">
+                                                                            <option value="">Selecionar...</option>
+                                                                            <option value="corrente">Corrente</option>
+                                                                            <option value="poupanca">Poupança</option>
+                                                                            <option value="investimento">Investimento</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>  
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>                                            
+                            </div>                                        
+                        </div>
+                    </div>
+                    <!-- FINAL: Dados Bancários -->
+
+                    <!-- INÍCIO: campos ocultos do formulário -->
+                    <input type="hidden" name="a1pessoa" id="a1pessoa">
+                    <input type="hidden" id="a1cod" name="a1cod">
+                    <input type="hidden" name="a1loja" id="a1loja">
+                    <input type="hidden" name="tipoConsumidor" id="tipoConsumidor">
+                    <input type="hidden" name="A1_NREDUZ" id="A1_NREDUZ">                    
+                    <!-- FINAL: campos ocultos do formulário -->
+
+                </div>
+
+            </div>
+
+        </form>
+        <!-- FINAL: formulário geral -->
+	</div>
+	
+	<script type="text/javascript" src="jquery.mask.min.js"></script>
+	<!-- script abaixo controla o botão que apaga o CPF/CNPJ -->
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    
+</body>
+</html>

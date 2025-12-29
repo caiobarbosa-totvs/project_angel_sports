@@ -1,0 +1,353 @@
+.componentAnexo{
+	display: flex;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.componentAnexo .input-group{
+	flex-grow: 1;
+	position: relative;
+}
+
+.componentAnexo .inputAnexo{
+	color: blue!important;
+	border-radius: 0!important;
+}
+
+.componentAnexo .icones{
+	display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.componentAnexo .icones .btn{
+	outline: none!important;
+    outline-offset: unset!important;
+    border-radius: 0;
+	padding-left: 7px;
+    padding-right: 7px;
+	margin-left: 3px;
+	height: 2.2em;
+}
+ 
+
+.componentAnexo .icones .btn-default,
+.componentAnexo .icones .btn-default:focus, 
+.componentAnexo .icones .btn-default:active,
+.componentAnexo .icones .btn-default:hover{
+	border: solid 1px #58595b!important;
+}
+
+.componentAnexo .icones .btn-primary,
+.componentAnexo .icones .btn-primary:focus, 
+.componentAnexo .icones .btn-primary:active,
+.componentAnexo .icones .btn-primary:hover{
+	border: solid 1px #58595b!important;
+}
+
+.componentAnexo .icones .btn-success,
+.componentAnexo .icones .btn-success:focus, 
+.componentAnexo .icones .btn-success:active,
+.componentAnexo .icones .btn-success:hover{
+	border: solid 1px #1ab83f!important;
+}
+
+.componentAnexo .icones .btn-info,
+.componentAnexo .icones .btn-info:focus, 
+.componentAnexo .icones .btn-info:active,
+.componentAnexo .icones .btn-info:hover{
+	border: solid 1px #1eaad9!important;
+}
+.componentAnexo .icones .btn-warning,
+.componentAnexo .icones .btn-warning:focus, 
+.componentAnexo .icones .btn-warning:active,
+.componentAnexo .icones .btn-warning:hover{
+	border: solid 1px #e3b420!important;
+}
+
+.componentAnexo .icones .btn-danger,
+.componentAnexo .icones .btn-danger:focus, 
+.componentAnexo .icones .btn-danger:active,
+.componentAnexo .icones .btn-danger:hover{
+	border: solid 1px #cc3d3d!important;
+}
+
+.css_heading {
+	background-color: #29393e !important;
+	color: #ffffff !important;
+	border: none !important;
+	height: 140px;
+}
+
+.svg-inline--fa{
+	height: 1.5em;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+}
+
+.css_heading1 {
+	background-color: #29393e !important;
+	color: #ffffff !important;
+	border: none !important;
+}
+
+.panel-heading {
+	background-color: #29393e !important; /*  #58595b  */
+	color: #ffffff !important;
+}
+
+.colorFundo {
+    background-color: rgba(41, 57, 62, 0.5) !important; /* Cor com 50% de transparência */
+    color: #ffffff !important;
+}
+
+.css_margin_bottom10 {
+	margin-bottom: 10px !important;
+}
+
+.css_margin_bottom15 {
+	margin-bottom: 15px !important;
+}
+
+.css_margin_bottom20 {
+	margin-bottom: 20px !important;
+}
+
+.css_margin_bottom25 {
+	margin-bottom: 25px !important;
+}
+
+.css_margin_bottom100 {
+	margin-bottom: 100px !important;
+}
+
+.css_margin_top5 {
+	margin-top: 5px !important;
+}
+
+.css_margin_top10 {
+	margin-top: 10px !important;
+}
+
+.css_margin_top15 {
+	margin-top: 15px !important;
+}
+
+.css_margin_top20 {
+	margin-top: 20px !important;
+}
+
+.css_margin_top25 {
+	margin-top: 25px !important;
+}
+
+.css_margin_top35 {
+	margin-top: 35px !important;
+}
+
+.css_margin_top70 {
+	margin-top: 70px !important;
+}
+
+.css_margin_right {
+	margin-right: 10px !important;
+}
+
+.css_border {
+	border-top: 1px solid #ccc !important;
+	border-bottom: 0px !important;
+	border-left: 1px solid #ccc !important;
+	border-right: 1px solid #ccc !important;
+	border-radius: 4px !important;
+}
+
+.button_red {
+	color: #fff !important;
+	background-color: #d9534f !important;
+	border-color: #d43f3a !important;
+}
+
+.button_green {
+	color: #fff !important;
+	background-color: #5cb85c !important;
+	border-color: #4cae4c !important;
+}
+.button_yellow {
+	color: #fff !important;
+	background-color: #f0ad4e !important;
+	border-color: #4cae4c !important;
+}
+
+caption {
+	padding: 2px !important;
+	border: 1px solid #ccc !important;
+	text-align: center !important;
+	color: black !important;
+}
+
+.noPadding {
+	padding: 1px !important;
+}
+
+.number {
+	text-align: right !important;
+}
+
+.breakless {
+	white-space: nowrap;
+}
+
+span.form-control {
+	overflow: hidden;
+}
+
+.noPointerEvents {
+	pointer-events: none !important;
+}
+
+.textRed {
+	color: red !important;
+}
+
+.textGreen {
+	color: green !important;
+}
+
+.upper {
+	text-transform: uppercase;
+}
+
+.inputTransparent {
+	background-color: transparent !important;
+	border: none !important;
+	color: #ffffff !important;
+	cursor: default !important;
+	box-shadow: none !important;
+	font-size: 115% !important;
+	padding: 0 !important;
+}
+
+.inputTransparent2 {
+	background-color: transparent !important;
+	border: none !important;
+	color: #29393e !important; 
+	cursor: default !important;
+	box-shadow: none !important;
+	font-size: 115% !important;
+	padding: 0 !important;
+}
+
+.alignCenter {
+	text-align: center !important;
+}
+
+input[type=datetime-local]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	display: none;
+}
+
+input[type=datetime-local]::-webkit-calendar-picker-indicator {
+	-webkit-appearance: none;
+	display: none;
+}
+
+.fluig-style-guide .nav-pills>li.active>a, .fluig-style-guide .nav-pills>li.active>a:hover, .fluig-style-guide .nav-pills>li.active>a:focus {
+	color: #ffffff !important;
+	background-color: #29393e !important;
+}
+
+legend {
+	border-color: #29393e !important;
+	font-weight: bold !important;
+}
+
+.btn-info {
+	color: #FFFFFF !important;
+	background-color: #29393e !important;
+}
+
+.input-group-addon {
+	background-color: #29393e !important;
+	color: #FFFFFF !important;
+}
+
+.fluigicon {
+	color: #FFFFFF !important;
+}
+
+
+.onlyPaddingTop {
+	padding-bottom: 0 !important;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.row {
+	margin-top: 5px !important;
+}
+
+.table>tbody>tr>td>input, .table>tbody>tr>td>select, .table>tbody>tr>td>span, .table>tbody>tr>td>textarea {
+	white-space: nowrap;
+}
+
+.manageSelect{
+	background: #eee !important;
+ 	pointer-events: none;
+  	touch-action: none;
+}
+
+.select2-selection {
+	/* SERVE PARA NÃÆO ACONTECER REIZE NO INPUT ZOOM QUANDO SELECIONADO UMA OPÃâ¡ÃÆO COM MUITOS CARACTERES, CHAMADO ABERTO : 7634315 */
+	height: 1px !important;
+}
+
+input.button-anexo {
+    background-image: url(fluigicon-paperclip.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+input.button-download {
+    background-image: url(fluigicon-download.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+input.button-viewer {
+    background-image: url(fluigicon-eye-open.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+input.button-delete {
+    background-image: url(flaticon-close.png); /* 16px x 16px */
+    background-color: #cc3d3d; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 3px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 16px;           /* make this the size of your image */
+    padding-left: 16px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}

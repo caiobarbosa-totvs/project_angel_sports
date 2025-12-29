@@ -1,0 +1,205 @@
+function createDataset(fields, constraints, sortFields) {
+
+	var constraintDs_consultaPrevidenciaSync2 = DatasetFactory.createConstraint('retornoRegistroExistente', '', '', ConstraintType.MUST);
+	var ds_consultaPrevidenciaSync = DatasetFactory.getDataset('ds_consultaPrevidenciaSync', null, new Array(constraintDs_consultaPrevidenciaSync2), null);
+
+	var dataset = DatasetFactory.newDataset();
+	
+	dataset.addColumn("processNumber");
+	dataset.addColumn("rdTipoInclusao");
+	dataset.addColumn("zoomcpfCnpj");
+	dataset.addColumn("zoomNomeCompleto");
+	
+	dataset.addColumn("txt_cdSeguradoraProp");
+	dataset.addColumn("txt_seguradoraProp");
+	dataset.addColumn("txt_NewProposta");
+	
+	dataset.addColumn("txt_proReg");
+	dataset.addColumn("txt_VgblPgblNew");
+	dataset.addColumn("creationDate");
+	
+	dataset.addColumn("aporte");
+	dataset.addColumn("mensalidade");
+	dataset.addColumn("fundo");
+	dataset.addColumn("percentual");
+	dataset.addColumn("retornoIncluiAtualizaRegistro");
+	
+	for(var i=0; i<ds_consultaPrevidenciaSync.rowsCount; i++){
+	//for(var i=0; i<1; i++){
+		
+			var zoomcpfCnpj = ds_consultaPrevidenciaSync.getValue(i, "zoomcpfCnpj");
+			var zoomNomeCompleto = ds_consultaPrevidenciaSync.getValue(i, "zoomNomeCompleto");
+			var txt_cdSeguradoraProp = ds_consultaPrevidenciaSync.getValue(i, "txt_cdSeguradoraProp");
+			var txt_seguradoraProp = ds_consultaPrevidenciaSync.getValue(i, "txt_seguradoraProp");
+			var txt_NewProposta = ds_consultaPrevidenciaSync.getValue(i, "txt_NewProposta");
+			var mensalidade = ds_consultaPrevidenciaSync.getValue(i, "mensalidade");
+			var aporte = ds_consultaPrevidenciaSync.getValue(i, "aporte");
+			var creationDate = ds_consultaPrevidenciaSync.getValue(i, "creationDate");
+			var txt_proReg = ds_consultaPrevidenciaSync.getValue(i, "txt_proReg");
+			var txt_VgblPgblNew = ds_consultaPrevidenciaSync.getValue(i, "txt_VgblPgblNew");
+			var fundo = ds_consultaPrevidenciaSync.getValue(i, "fundo");
+			var percentual = ds_consultaPrevidenciaSync.getValue(i, "percentual");
+			
+			var retornoIncluiAtualizaRegistro = incluiRegistroPropostaFluig(zoomcpfCnpj, zoomNomeCompleto, txt_cdSeguradoraProp, 
+					txt_seguradoraProp, txt_NewProposta, mensalidade, aporte, creationDate, txt_proReg, txt_VgblPgblNew,
+					fundo, percentual)			
+			
+			dataset.addRow([ds_consultaPrevidenciaSync.getValue(i, "processNumber"), 
+				ds_consultaPrevidenciaSync.getValue(i, "rdTipoInclusao"), 
+				ds_consultaPrevidenciaSync.getValue(i, "zoomcpfCnpj"), 
+				ds_consultaPrevidenciaSync.getValue(i, "zoomNomeCompleto"),
+				ds_consultaPrevidenciaSync.getValue(i, "txt_cdSeguradoraProp"),
+				ds_consultaPrevidenciaSync.getValue(i, "txt_seguradoraProp"),
+				ds_consultaPrevidenciaSync.getValue(i, "txt_NewProposta"),
+				ds_consultaPrevidenciaSync.getValue(i, "txt_proReg"),
+				ds_consultaPrevidenciaSync.getValue(i, "txt_VgblPgblNew"),
+				ds_consultaPrevidenciaSync.getValue(i, "creationDate"),
+				ds_consultaPrevidenciaSync.getValue(i, "aporte"),
+				ds_consultaPrevidenciaSync.getValue(i, "mensalidade"),
+				ds_consultaPrevidenciaSync.getValue(i, "fundo"),
+				ds_consultaPrevidenciaSync.getValue(i, "percentual"),
+				ds_consultaPrevidenciaSync.getValue(i, "retornoRegistroExistente"),
+				retornoIncluiAtualizaRegistro]);				
+
+		
+	}
+	
+	return dataset;
+}
+
+function incluiRegistroPropostaFluig(cpfCnpj, zoomNomeCompleto, txt_cdSeguradora, 
+		txt_seguradora, txt_NewProposta, mensalidade, aporte, dataCadastro, txt_proReg, txt_VgblPgblNew,
+		fundo, percentual){
+	log.info("### incluiRegistroPropostaFluig ###");
+	try {		
+		
+		var config = recuperaDadosFixos();
+			
+			var serviceProvider = ServiceManager.getServiceInstance("ECMCardService"); //codigo do serviço
+			var wkServiceEngine = serviceProvider.instantiate("com.totvs.ECMCardServiceService");
+			var service = wkServiceEngine.getCardServicePort();
+			var cardDtos = serviceProvider.instantiate("com.totvs.CardDtoArray");
+			var cardDto = serviceProvider.instantiate("com.totvs.CardDto");
+			
+				cardDto.setParentDocumentId(parseInt(""+recuperaIdFormPaiPropostaSeguradora()));
+				cardDto.setColleagueId(""+config.usuarioFluig);
+				cardDto.setInheritSecurity(true);
+			var cardData = serviceProvider.instantiate("com.totvs.CardFieldDtoArray");
+			log.info("### 1 ###");
+			cardDto.getCardData().add(0,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(0).setField("cpfCnpj");
+			cardDto.getCardData().get(0).setValue(cpfCnpj);
+			
+			cardDto.getCardData().add(1,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(1).setField("nomeCompleto");
+			cardDto.getCardData().get(1).setValue(zoomNomeCompleto);			
+			log.info("### 2 ###");
+			cardDto.getCardData().add(2,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(2).setField("txt_cdSeguradora");
+			cardDto.getCardData().get(2).setValue(txt_cdSeguradora);
+			
+			cardDto.getCardData().add(3,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(3).setField("txt_seguradora");
+			cardDto.getCardData().get(3).setValue(txt_seguradora);			
+			
+			cardDto.getCardData().add(4,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(4).setField("txt_propostaSeguradora");
+			cardDto.getCardData().get(4).setValue(txt_NewProposta);
+			log.info("### 3 ###");
+			cardDto.getCardData().add(5,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(5).setField("campoDescritor");
+			cardDto.getCardData().get(5).setValue(zoomNomeCompleto+" - "+txt_seguradora+" - "+txt_NewProposta);			
+			
+			cardDto.getCardData().add(6,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(6).setField("dataCadastro");
+			cardDto.getCardData().get(6).setValue(formataDataParaYYYYMMDD(dataCadastro));
+			log.info("### 4 ###");
+			cardDto.getCardData().add(7,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(7).setField("txt_aporte");
+			cardDto.getCardData().get(7).setValue(aporte);
+			
+			cardDto.getCardData().add(8,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(8).setField("txt_mensalidade");
+			cardDto.getCardData().get(8).setValue(mensalidade);
+			
+			cardDto.getCardData().add(9,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(9).setField("nomeFundo");
+			cardDto.getCardData().get(9).setValue(fundo);
+			log.info("### 5 ###");
+			cardDto.getCardData().add(10,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(10).setField("percentualFundo");
+			cardDto.getCardData().get(10).setValue(percentual);	
+			
+			cardDto.getCardData().add(11,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(11).setField("txt_proReg");
+			cardDto.getCardData().get(11).setValue(txt_proReg);
+			
+			cardDto.getCardData().add(12,serviceProvider.instantiate("com.totvs.CardFieldDto"));
+			cardDto.getCardData().get(12).setField("txt_VgblPgblNew");
+			cardDto.getCardData().get(12).setValue(txt_VgblPgblNew);			
+			log.info("### 6 ###");
+			cardDtos.getItem().add(0,cardDto);
+			
+			var result = service.create("1", ""+config.usuarioFluig, ""+config.senhaFluig, cardDtos)
+			log.info("## result: "+result);
+			log.info("#result ============================> " + result.getItem().get(0).documentId);
+			var docId = result.getItem().get(0).documentId;
+			if(docId > 0){
+				return docId;
+			}else{
+				return "nok"	
+				log.error("Erro para salvar registro de saldo x seguradora por cliente..."+result.getItem().get(0).webServiceMessage);			
+			}			
+
+				
+
+	} catch (e) {
+		return "nok"	
+		log.error("Erro para salvar registro de proposta x seguradora por cliente..."+e.toString());
+	}
+	
+}
+
+function recuperaDadosFixos(){
+	
+	var constraintDs_config1 = DatasetFactory.createConstraint('metadata#active', 'true', 'true', ConstraintType.MUST);
+	var colunasDs_config = new Array('usuarioFluig', 'senhaFluig');
+	var datasetDs_config = DatasetFactory.getDataset('ds_configIntegracao', colunasDs_config, new Array(constraintDs_config1), null);
+	
+	try {
+		
+		if(datasetDs_config.rowsCount>0){
+			return {
+				"usuarioFluig": datasetDs_config.getValue(0, "usuarioFluig"),
+				"senhaFluig" : datasetDs_config.getValue(0, "senhaFluig"),
+			}
+		}else{
+			log.error("Não há usuário e senha cadastrados para integração...")
+			throw "Não há usuário e senha cadastrados para integração"
+		}		
+		
+	} catch (e) {
+		log.error("Não há usuário e senha cadastrados para integração..."+e)
+		throw "Não há usuário e senha cadastrados para integração"+e
+	}
+
+}
+
+function recuperaIdFormPaiPropostaSeguradora(){
+	
+	var constraintDocument1 = DatasetFactory.createConstraint('datasetName', 'ds_registrosPropostaSeguradoraCliente', 'ds_registrosPropostaSeguradoraCliente', ConstraintType.MUST);
+	var constraintDocument2 = DatasetFactory.createConstraint('activeVersion', 'true', 'true', ConstraintType.MUST);
+	var colunasDocument = new Array('documentPK.documentId');
+	var datasetDocument = DatasetFactory.getDataset('document', colunasDocument, new Array(constraintDocument1, constraintDocument2), null);
+
+	return datasetDocument.getValue(0, "documentPK.documentId")
+}
+
+function formataDataParaYYYYMMDD(dataString) {
+
+	  // Separa os componentes da data em um array
+	  var partesData = dataString.split("/");
+
+	  // Retorna a data no formato aaaammdd
+	  return partesData[2]+""+partesData[1]+""+partesData[0];
+}

@@ -1,0 +1,10 @@
+function beforeTaskSave(colleagueId,nextSequenceId,userList){
+	
+	if((getValue("WKNumState") == INICIO_0 || getValue("WKNumState") == INICIO)  && getValue("WKCompletTask") == "true"){
+		
+		if(verficaAnexo() == 0 && hAPI.getCardValue("rdTipoInclusao") == "anexo"){
+			throw "É obrigatória a inclusão de pelo menos 1 anexo";
+		}		
+	}
+	
+}

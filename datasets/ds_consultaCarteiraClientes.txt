@@ -1,0 +1,70 @@
+function createDataset(fields, constraints, sortFields) {
+
+    var dataset = DatasetBuilder.newDataset();
+    
+    //Cria as colunas
+    dataset.addColumn("cpfCnpj");
+    dataset.addColumn("nomeCompleto");
+    dataset.addColumn("dataNascimento");
+    dataset.addColumn("razaoSocial");    
+    dataset.addColumn("dataAbertura");
+    dataset.addColumn("processNumber");
+    dataset.addColumn("version");
+    dataset.addColumn("documentid");
+    dataset.addColumn("creationDate");
+    
+    var filter = getConstraints(constraints);
+    //filter.nomeCompleto = "ADIANO JOSE  LOUZAO SILVA JUNIOR";
+    filter.creationDateIni = "06/10/2025";
+    filter.creationDateFin = "10/10/2025";
+    var constraint = [];
+    
+    if(filter.CpfCnpj != undefined)
+    	constraint.push(DatasetFactory.createConstraint("CpfCnpj", filter.CpfCnpj, filter.CpfCnpj, ConstraintType.MUST));
+    
+    if(filter.nomeCompleto != undefined)
+    	constraint.push(DatasetFactory.createConstraint("nomeCompleto", filter.nomeCompleto, filter.nomeCompleto, ConstraintType.MUST));
+    
+    if(filter.razaoSocial != undefined)
+    	constraint.push(DatasetFactory.createConstraint("razaoSocial", filter.nomeCompleto, filter.nomeCompleto, ConstraintType.MUST));
+    
+    if(filter.creationDate != undefined)
+    	constraint.push(DatasetFactory.createConstraint("creationDate", filter.creationDateIni, filter.creationDateFin, ConstraintType.MUST));    
+    
+    var colunasDs_cadClientes = new Array('cpfCnpj', 'nomeCompleto', 'dataNascimento', 'razaoSocial', 'dataAbertura', 'processNumber', 'version', 'documentid', 'creationDate');
+    var datasetDs_cadClientes = DatasetFactory.getDataset('ds_cadClientes', colunasDs_cadClientes, constraint, null);
+    
+    for(var i=0; i<datasetDs_cadClientes.rowsCount; i++){
+    	
+    	dataset.addRow(new Array(datasetDs_cadClientes.getValue(i, "cpfCnpj"), 
+    			datasetDs_cadClientes.getValue(i, "nomeCompleto"), 
+    			datasetDs_cadClientes.getValue(i, "dataNascimento"), 
+    			datasetDs_cadClientes.getValue(i, "razaoSocial"), 
+    			datasetDs_cadClientes.getValue(i, "dataAbertura"), 
+    			datasetDs_cadClientes.getValue(i, "processNumber"), 
+    			datasetDs_cadClientes.getValue(i, "version"), 
+    			datasetDs_cadClientes.getValue(i, "documentid"),
+    			datasetDs_cadClientes.getValue(i, "creationDate")))
+    	
+    }
+    
+    return dataset;
+}
+
+function getConstraints(constraints){
+	var params = new Object();
+	log.info("#constraints: " + constraints);
+	if(constraints.length > 0){
+		for (var i in constraints){
+			log.info("#constraints: " + constraints[i].fieldName + " value: " + constraints[i].initialValue);			
+			if(constraints[i].fieldName == "CpfCnpj") params.CpfCnpj = constraints[i].initialValue;
+			if(constraints[i].fieldName == "nomeCompleto") params.nomeCompleto = constraints[i].initialValue;
+			if(constraints[i].fieldName == "razaoSocial") params.razaoSocial = constraints[i].initialValue;
+			if(constraints[i].fieldName == "creationDateIni") params.creationDateIni = constraints[i].initialValue;
+			if(constraints[i].fieldName == "creationDateFin") params.creationDateFin = constraints[i].initialValue;
+		}
+	}else{
+		log.error("#não foram enviados os params");
+	}	
+    return params;
+}

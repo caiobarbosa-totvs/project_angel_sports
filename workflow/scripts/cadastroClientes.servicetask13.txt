@@ -1,0 +1,217 @@
+function servicetask13(attempt, message) {
+
+	log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+	log.info("@@@@@@@@ CADASTRO DE CLIENTE NO PROTHEUS2 @@@@@@@@@");
+	log.info("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+
+	try {
+		var clientService = fluigAPI.getAuthorizeClientService();
+
+		var tipoPessoa = hAPI.getCardValue("tipoPessoa");
+		var A1PESSOA = tipoPessoa === "- Pessoa Física" ? "F" : "J";
+
+		var cidade = hAPI.getCardValue("cidade");
+		var cidadePj = hAPI.getCardValue("cidadePj");
+
+		if (cidade != "" && cidade != null) {
+			var A1MUN = removerCaracteresEspeciais(cidade);
+		} else if (cidadePj != "" && cidadePj != null) {
+			var A1MUN = removerCaracteresEspeciais(cidadePj);
+		}
+
+		log.info("### a1cod: " + hAPI.getCardValue("a1cod"))
+		log.info("### a1loja: " + hAPI.getCardValue("a1loja"))
+
+		if (hAPI.getCardValue("a1cod") == "" || hAPI.getCardValue("a1cod") == null) {
+			var A1COD = "ZZZZZZ";
+		} else {
+			var A1COD = hAPI.getCardValue("a1cod");
+		}
+
+		if (hAPI.getCardValue("a1loja") == "" || hAPI.getCardValue("a1loja") == null) {
+			var A1LOJA = "ZZ";
+		} else {
+			var A1LOJA = hAPI.getCardValue("a1loja");
+		}
+
+
+		if (hAPI.getCardValue("cpfCnpj") != "" && hAPI.getCardValue("cpfCnpj") != null) {
+			var A1CGC = formatarCPFouCNPJ(hAPI.getCardValue("cpfCnpj"));
+		} else if (hAPI.getCardValue("zoomcpfCnpj") != "" && hAPI.getCardValue("zoomcpfCnpj") != null) {
+			var A1CGC = formatarCPFouCNPJ(hAPI.getCardValue("zoomcpfCnpj"));
+		}
+
+		if (hAPI.getCardValue("dataNascimento") != "" && hAPI.getCardValue("dataNascimento") != null) {
+			var dataNascimento = hAPI.getCardValue("dataNascimento");
+		} else {
+			var dataNascimento = hAPI.getCardValue("dataAbertura");
+		}
+
+		if (hAPI.getCardValue("nomeCompleto") != "" && hAPI.getCardValue("nomeCompleto") != null) {
+			var nomeCompleto = hAPI.getCardValue("nomeCompleto")
+		} else {
+			var nomeCompleto = hAPI.getCardValue("zoomNomeCompleto")
+		}
+
+		var A1NREDUZ = "" + nomeCompleto;
+		A1NREDUZ = A1NREDUZ.substring(0, 19);
+
+		// -- Correção de Telefone Exterior
+		var rawTelExt = hAPI.getCardValue("telefoneExterior");
+		var A1XTELEXT = 0;
+		
+		if (rawTelExt != null && rawTelExt != "") {
+			var cleanTel = new java.lang.String(rawTelExt).replaceAll("[^0-9]", "");
+			
+			if (cleanTel != "") {
+	             A1XTELEXT = parseInt(cleanTel);
+	        }
+		}
+
+		var data = {
+			companyId: '1',
+			serviceCode: "rest-protheus",
+			endpoint: '/angcli/cadcli',
+			method: 'post',
+			timeoutService: '100',
+			headers: {
+				"Accept-Charset": "UTF-8",
+				"Content-Type": "application/json",
+			},
+			params: {
+				"ANGSA1": {
+					"A1COD": A1COD,
+					"A1LOJA": A1LOJA,
+					"A1PESSOA": hAPI.getCardValue("a1pessoa"),
+					"A1XTIPOCL": hAPI.getCardValue("catCliente"),
+					"A1NOME": nomeCompleto,
+					"A1NREDUZ": A1NREDUZ,
+					"A1CEP": formatarCEP(hAPI.getCardValue("cep")),
+					"A1END": hAPI.getCardValue("rua"),
+					"A1COMPLEM": hAPI.getCardValue("numero"),
+					"A1TIPO": "F",
+					"A1EST": hAPI.getCardValue("codUF"),
+					"A1CODMUN": hAPI.getCardValue("codMun"),
+					"A1MUN": hAPI.getCardValue("municip"),
+					"A1BAIRRO": hAPI.getCardValue("bairro"),
+					"A1CGC": A1CGC,
+					"A1EMAIL": hAPI.getCardValue("email"),
+					"A1DDD": "",
+					"A1TEL": new java.lang.String(hAPI.getCardValue("telefoneBrasil")).replaceAll("[^0-9]", ""),
+					"A1INSCR": "",
+					"A1INSCRM": "",
+					"A1MSBLQL": "2",
+					"A1DDI": hAPI.getCardValue("codDDI"),
+					"A1XIBAN": hAPI.getCardValue("iban"),
+					"A1XBAN": hAPI.getCardValue("bancoIdent"),
+					"A1XSPREAD": hAPI.getCardValue("spreadAcordado"),
+					"A1XRESPON": hAPI.getCardValue("responsavel"),
+					"A1XTELEXT": A1XTELEXT,
+					"A1CNAE": hAPI.getCardValue("cnae"),
+					"A1XNOMSOC": hAPI.getCardValue("socioMarjoritario"),
+					"A1XCPFMAJ": hAPI.getCardValue("cpfMarjoritario"),
+					"A1XENDSOC": hAPI.getCardValue("enderecoSocio"),
+					"A1XENDEXT": hAPI.getCardValue("enderecoExt"),
+					"A1XNIFIID": hAPI.getCardValue("nifIcamaIdEstrangeiro"),
+					"A1PFISICA": hAPI.getCardValue("numeroRg"),
+					"A1XPASS": hAPI.getCardValue("numPassaporte"),
+					"A1XCONJ": "" + hAPI.getCardValue("conjuge"),
+					"A1XCPFCON": "" + hAPI.getCardValue("cpfConjuge"),
+					"A1XPROC": "",
+					"A1XUSR": "",
+					"A1XNOMSOL": "",
+					"A1XMAISOL": "",
+					"A1XORISOL": hAPI.getCardValue("orgemSolic"),
+					"A1XSAIDEF": "",
+					"A1DTNASC": dataNascimento,
+					"A1XVENCRG": hAPI.getCardValue("dataVencRg"),
+					"A1XVENPAS": hAPI.getCardValue("dataVencPassaporte"),
+					"A1XINCTR": hAPI.getCardValue("dataInicioCt"),
+					"A1XFIMCTR": hAPI.getCardValue("dataFimCt"),
+					"A1XDTCREA": "01/01/30",
+					"A1XNACONJ": "" + hAPI.getCardValue("dataNascConjuge"),
+					"A1XSAIDEF": hAPI.getCardValue("saidaDefinitiva"),
+					"A1DOCUMENTS": [
+						{
+							"DOCUMENT": "HTTP DP LINK DA IMAGEM NO FLUIG",
+							"DOCUMENTYPE": "RG"
+						}
+					]
+				}
+			}
+		};
+
+		log.dir(data);
+
+		var retornoApi = clientService.invoke(JSONUtil.toJSON(data));
+		var retornojson = JSON.parse(retornoApi.getResult());
+		var statusHttp = retornoApi.getHttpStatusResult();
+
+		log.info(retornoApi.getResult());
+
+		if (retornoApi.getResult() == null || retornoApi.getResult().isEmpty())
+			throw java.lang.Exception("Ocorreu uma falha no retorno da API!");
+
+		if (statusHttp >= "400") {
+			var patternMsg = java.util.regex.Pattern.compile("Mensagem do erro:\\s*\\[(.*?)\\]", java.util.regex.Pattern.DOTALL);
+			var matcherMsg = patternMsg.matcher(retornoApi.getResult());;
+			var patternConteudo = java.util.regex.Pattern.compile("Conteudo atribuido:\\s*\\[(.*?)\\]", java.util.regex.Pattern.DOTALL);
+			var matcherConteudo = patternConteudo.matcher(retornoApi.getResult());;
+			var mensagemErro = "";
+
+			if (matcherMsg.find()) {
+				mensagemErro = matcherMsg.group(1).trim(); // Captura o texto dentro dos colchetes
+			}
+
+			if (matcherConteudo.find()) {
+				mensagemErro += " - " + matcherConteudo.group(1).trim(); // Captura o texto dentro dos colchetes
+			}
+
+			else {
+				mensagemErro = "Erro desconhecido.";
+			}
+
+			throw mensagemErro;
+		}
+
+		hAPI.setCardValue("retornoProtheus", retornojson.Codigo);
+	} catch (err) {
+		throw new java.lang.String(err) + (err.lineNumber ? " - Linha: " + String(err.lineNumber) : "");
+	}
+	return true;
+}
+
+function removerCaracteresEspeciais(texto) {
+	// Expressão regular para encontrar caracteres especiais
+	var regex = /[^a-zA-Z0-9\s]/g;
+	// Substitui caracteres especiais por uma string vazia
+	return new java.lang.String(texto).replaceAll(regex, '').toString();
+}
+
+function formatarCEP(cep) {
+	// Remove todos os caracteres não numéricos do CEP
+	cep = new java.lang.String(cep).replaceAll("\\D", '').toString();
+	if (cep.length() !== 8) {
+		return "CEP inválido";
+	}
+	cep = cep.substring(0, 5) + cep.substring(5);
+
+	return cep;
+}
+
+function formatarCPFouCNPJ(cpfOuCnpj) {
+	// Remove todos os caracteres não numéricos do CPF ou CNPJ
+	cpfOuCnpj = new java.lang.String(cpfOuCnpj).replaceAll("\\D", '').toString();
+
+	// Verifica se o tamanho da string é compatível com CPF ou CNPJ
+	if (cpfOuCnpj.length() === 11) {
+		// Formata CPF no padrão XXXXXXXXXXX
+		return cpfOuCnpj.substring(0, 3) + cpfOuCnpj.substring(3, 6) + cpfOuCnpj.substring(6, 9) + cpfOuCnpj.substring(9);
+	} else if (cpfOuCnpj.length() === 14) {
+		// Formata CNPJ no padrão XX.XXX.XXX/XXXX-XX
+		return cpfOuCnpj.substring(0, 2) + cpfOuCnpj.substring(2, 5) + cpfOuCnpj.substring(5, 8) + cpfOuCnpj.substring(8, 12) + cpfOuCnpj.substring(12);
+	} else {
+		// Tamanho inválido, pode lançar uma exceção ou retornar uma mensagem de erro
+		return "CPF ou CNPJ inválido";
+	}
+}
