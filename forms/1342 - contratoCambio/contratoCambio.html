@@ -1,0 +1,586 @@
+
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/plentz/jquery-maskmoney@master/dist/jquery.maskMoney.min.js"></script>
+    <script type="text/javascript" src="jquery.mask.min.js"></script>
+    <script type="text/javascript" src="jquery.maskMoney.min.js"></script>
+    <script type="text/javascript" src="jquery.inputmask.bundle.js"></script>
+    
+    <script src="/webdesk/vcXMLRPC.js"></script>
+		
+	<link type="text/css" rel="stylesheet" href="contratoCambio.css"/>
+	<script type="text/javascript" src="anexos.js" charset="utf-8"></script>
+	<script type="text/javascript" src="contratoCambio.js"></script>
+	<script type="text/javascript" src="atividades.js"></script>
+	<script type="text/javascript" src="requiredFieldsRule.js"></script>
+	<script type="text/javascript" src="enableFields.js"></script>
+	<script type="text/javascript" src="beforeSendValidate.js"></script>	
+</head>
+<body>
+	<div class="fluig-style-guide">
+        <!-- INÍCIO: formulário geral -->
+        <form class="modForm" role="form" name="frm" id="frm">
+
+		<input type="hidden" class="form-control" id="cdNatureza" name="cdNatureza">
+
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+
+                    <!-- INÍCIO: título de cabeçalho -->
+                    <div class="panel-heading css_heading vertical-center">
+                        <div class="panel-body">
+                            <div class="row ">
+
+                                <div class="col-md-12 col-xs-12">
+
+                                    <div class="col-md-6">
+                                        <img src="logo-Angel-Sports.png" />
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h1 style="font-size: 20px; color: white; font-weight: bold; padding-left: 5px;">Operações Cambiais</h1>
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <!-- FINAL: título de cabeçalho -->
+
+                    <br/><br/>
+
+                    <!-- INÍCIO: informações da solicitação -->
+                    <div class="panel panel-primary" id="secInformacoes" name="secInformacoes">
+					
+                        <div class="panel-heading">
+                            <div>
+                                <h3 style="font-weight: bold !important;" class="panel-title">Informações Gerais <input class="inputTransparent" type="text" name="tipoPessoa" id="tipoPessoa" value="" readOnly></h3>
+                            </div>
+                        </div>
+    
+                        <div class="panel-body">
+
+                            <!-- INÍCIO: informações do solicitante -->
+                            <section>
+                            
+                                <div class="row">
+                                                            
+                                    <div class="col-md-6 col-xs-12" style="font-size: 11;">
+                                        <div class="col-md-4">
+                                            <label for="processNumber" style="font-size: 15px;"><b>Nº Solicitação:</b></label>
+                                            <input class="form-control inputTransparent2" type="text" id="processNumber" name="processNumber" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="nameUserCreation" style="font-size: 15px;"><b>Usuário:</b></label>									
+                                            <input class="form-control inputTransparent2" type="text" id="nameUserCreation" name="nameUserCreation" readonly />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="creationDate" style="font-size: 15px;"><b>Data Cadastral:</b></label>					
+                                            <input style="font-size: 15px;" class="form-control campo-data" type="text" id="creationDate" name="creationDate" />
+                                        </div>
+                                    </div>                            
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="rdTipoInclusaoOrdem">Tipo de inclusão</label>
+                                            <label class="radio">
+                                                <div class="radio">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoOrdem" value="ordem">Ordem
+                                                    </label>
+<!--                                                     <label class="radio-inline">
+                                                        <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoFechamento" value="fechamento">Fechamento
+                                                    </label>  -->
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="rdTipoInclusao" id="rdTipoInclusaoAnexo" value="anexo">Anexo
+                                                    </label>                                                                                                   
+                                                </div>
+
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="notifWhatsapp">Enviar Notificação via Whatsapp?</label>
+                                            <select class="form-control" name="notifWhatsapp" id="notifWhatsapp">
+                                                <option value="">Selecionar</option>
+                                                <option value="sim">Sim</option>
+                                                <option value="nao">Não</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+	                                   <label for="txt_natureza"><strong>Natureza</strong></label>
+	                                   <input type="hidden" class="form-control" name="txt_cdNatureza" id="txt_cdNatureza">
+	                                   <input type="zoom" class="form-control" name="txt_natureza" id="txt_natureza" 
+										data-zoom="{
+                                                    'displayKey': 'ED_DESCRIC',
+                                                    'datasetId': 'ds_naturezaProtheus',
+                                                    'maximumSelectionLength':'1',
+                                                    'fields': [
+                                                        {
+                                                            'field': 'ED_CODIGO',
+                                                            'label': 'Código'
+                                                         },														
+                                                       {
+                                                           'field': 'ED_DESCRIC',
+                                                           'label': 'Nome',	
+                                                           'standard': 'true',
+                                                           'search': 'true'
+                                                        }
+                                                     ]
+	                                           }"/>
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomEmpresaProtheus">Empresa</label>
+                                            <input type="hidden" class="form-control" id="cdEmpresaProtheus" name="cdEmpresaProtheus">
+                                            <input type="zoom" class="form-control" id="zoomEmpresaProtheus" name="zoomEmpresaProtheus"
+                                                data-zoom="{
+                                                        'displayKey': 'M0_FILIAL',
+                                                        'datasetId': 'ds_empresaFilialProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                            {
+                                                                'field': 'M0_CODFIL',
+                                                                'label': 'Código'	
+                                                            },                                                        
+                                                            {
+                                                                'field': 'M0_FILIAL',
+                                                                'label': 'Nome',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            },
+                                                            {
+                                                                'field': 'M0_CODIGO',
+                                                                'visible': 'false'
+                                                            },
+                                                            {
+                                                                'field': 'M0_NOMECOM',
+                                                                'visible': 'false'
+                                                            }                                                                
+                                                            ]
+                                                }"/>
+                                        </div>
+                                    </div>  
+
+                                    <div class="col-xs-12 col-sm-6 col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label" for="filialProtheus">Filial</label>
+                                            <input type="hidden" class="form-control" id="cdFilialProtheus" name="cdFilialProtheus">
+                                            <input type="text" class="form-control" id="filialProtheus" name="filialProtheus" readonly="readonly"/>
+                                        </div>
+                                    </div>                                  
+                                    
+                                </div>    
+                            
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nomeSolicitante">Nome do Solicitante</label>
+                                            <input type="text" class="form-control" id ="nomeSolicitante" name="nomeSolicitante" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="emailSolicitante">E-mail do Solicitante</label>
+                                            <input type="text" class="form-control" id="emailSolicitante" name="emailSolicitante" readonly>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamentoRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomreferencia">Referência</label>
+                                            <input type="zoom" class="form-control campoFechamento" id="zoomreferencia" name="zoomreferencia"
+                                                data-zoom="{
+                                                        'displayKey': 'E1_NUM',
+                                                        'datasetId': 'ds_titulosCambio',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                            {
+                                                                'field': 'E1_NUM',
+                                                                'label': 'Nome',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            },
+                                                            {
+                                                                'field': 'A1_NOME',
+                                                                'label': 'Cliente'
+                                                                }
+                                                            ]
+                                                }"/>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    
+                                </div>
+
+                                <div class="row">
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="tipoOperacao">Tipo de Operação</label>
+                                            <select class="form-control campoFechamento campoOrdem" name="tipoOperacao" id="tipoOperacao" onchange="calcTotal(this);">
+                                                <option value="">Selecionar</option>
+                                                <option value="1">1 - Exportação</option>
+                                                <option value="2">2 - Importação</option>
+                                                <option value="3">3 - Financeiro Compra</option>
+                                                <option value="4">4 - Financeiro Venda</option>
+                                            </select>
+                                        </div>
+                                    </div>                                 
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classOrdemRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomNomeCompleto">Cliente</label>
+                                            <input type="hidden" class="form-control" id="a1pessoa" name=a1pessoa>
+                                            <input type="hidden" class="form-control campoOrdem campoFechamento" id="a1cod" name=a1cod>
+                                            <input type="hidden" class="form-control" id="a1loja" name="a1loja"> 
+                                            <input type="hidden" class="form-control" id="a1telefone" name="a1telefone">                                            
+                                            <input type="zoom" class="form-control" id="zoomNomeCompleto" name="zoomNomeCompleto"
+												data-zoom="{
+                                                        'displayKey': 'A1_NOME',
+                                                        'datasetId': 'ds_listaClientesProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                           {
+                                                               'field': 'A1_NOME',
+                                                               'label': 'Nome',	
+                                                               'standard': 'true',
+                                                               'search': 'true'
+                                                            },
+                                                            {
+                                                                'field': 'A1_COD',
+                                                                'label': 'Código'
+                                                             },
+                                                             {
+                                                                'field': 'A1_CGC',
+                                                                'label': 'CPF/CNPJ'
+                                                             },
+                                                             {
+                                                                'field': 'A1_TEL',
+                                                                'label': 'Telefone',
+                                                                'visible': 'false'
+                                                             }
+                                                         ]
+                                               }"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamentoRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="nomeCliente">Cliente</label>
+                                            <input type="text" class="form-control campoFechamento" id="nomeCliente" name="nomeCliente" readonly="readonly"/>
+                                        </div>
+                                    </div>                                    
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classOrdemRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomcpfCnpj">CPF/CNPJ</label>
+                                            <input type="zoom" class="form-control" id="zoomcpfCnpj" name="zoomcpfCnpj"
+                                                data-zoom="{
+                                                        'displayKey': 'A1_CGC',
+                                                        'datasetId': 'ds_listaClientesProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                           {
+                                                               'field': 'A1_NOME',
+                                                               'label': 'Nome'
+                                                            },
+                                                            {
+                                                                'field': 'A1_COD',
+                                                                'label': 'Código'
+                                                             },
+                                                             {
+                                                                'field': 'A1_CGC',
+                                                                'label': 'CPF/CNPJ',	
+                                                               'standard': 'true',
+                                                               'search': 'true'
+                                                             }
+                                                         ]
+                                               }"/>
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamentoRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="cpfCnpjCliente">CPF/CNPJ</label>
+                                            <input type="text" class="form-control campoFechamento" id="cpfCnpjCliente" name="cpfCnpjCliente" readonly="readonly"/>
+                                        </div>
+                                    </div>                                                                        
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classOrdemRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="referencia">Referência</label>
+                                            <input type="text" class="form-control campoOrdem" id="referencia" name="referencia">
+                                        </div>
+                                    </div>
+
+									<div class="col-xs-12 col-sm-6 col-md-3 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomOperadora">Operadora</label>
+                                            <input type="hidden" class="form-control campoFechamento" id="a1lojaOper" name="a1lojaOper" readonly>
+                                            <input type="hidden" class="form-control campoFechamento" id="a1CgcOper" name="a1CgcOper" readonly>
+                                            <input type="hidden" class="form-control campoFechamento" id="cdOperadora" name="cdOperadora" readonly>
+                                            <input type="zoom" class="form-control campoFechamento" id="zoomOperadora" name="zoomOperadora"
+                                                data-zoom="{
+                                                        'displayKey': 'A1_NOME',
+                                                        'datasetId': 'ds_seguradorasProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                            {
+                                                                'field': 'A1_COD',
+                                                                'label': 'Código'
+                                                            },{
+                                                                'field': 'A1_CGC',
+                                                                'visible': 'false'
+                                                            },{
+                                                                'field': 'A1_LOJA',
+                                                                'visible': 'false'
+                                                            },{
+                                                                'field': 'A1_NOME',
+                                                                'label': 'Nome',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            }
+                                                            ]
+                                                }"/>
+                                        </div>
+                                    </div>
+                                    
+                                    
+								</div>
+                                <div class="row">
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamentoRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="valorOrdem">Valor da Ordem</label>
+                                            <input type="text" class="form-control campoFechamento" id="valorOrdem" name="valorOrdem" readonly="readonly">
+                                        </div>
+                                    </div>                                                                                              
+
+									<div class="col-xs-12 col-sm-6 col-md-3 classFechamentoRef">
+									
+										<div class="form-group">
+                                            <label class="control-label" for="moeda">Moeda</label>	
+                                            <input type="text" class="form-control campoFechamento" id="moeda" name="moeda" readonly="readonly">
+                                        </div>								
+									
+									</div>
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classOrdem classOrdemRef">
+                                        <div class="form-group">
+                                            <label class="control-label" for="zoomMoeda">Moeda</label>
+                                            <input type="hidden" class="form-control campoOrdem campoFechamento" id="cdMoeda" name="cdMoeda">                                            
+                                            <input type="zoom" class="form-control" id="zoomMoeda" name="zoomMoeda"
+                                                data-zoom="{
+                                                        'displayKey': 'DESCRICAO',
+                                                        'datasetId': 'ds_moedasProtheus',
+                                                        'maximumSelectionLength':'1',
+                                                        'fields': [
+                                                                {
+                                                                'field': 'CODIGO',
+                                                                'label': 'Código'
+                                                                },                                                        
+                                                            {
+                                                                'field': 'DESCRICAO',
+                                                                'label': 'CPF/CNPJ',	
+                                                                'standard': 'true',
+                                                                'search': 'true'
+                                                            }
+                                                            ]
+                                                }"/>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="moeda">Moeda</label>
+                                            <select class="form-control" name="moeda" id="moeda" onblur="calcTotal(this);">
+                                                <option value="">Selecionar</option>
+                                                <option value="usdDolarAmericano">USD Dólar Americano</option>
+                                                <option value="audDolarAustraliano">AUD Dólar australiano</option>
+                                                <option value="cadDolarCanadense">CAD Dólar canadense</option>
+                                                <option value="nzdDolarNeozelandes">NZD Dólar neozelandês</option>
+                                                <option value="eurEuro">EUR Euro</option>
+                                                <option value="chfFrancoSuico">CHF Franco suíço</option>
+                                                <option value="cnyYuanChines">CNY Yuan chinês</option>
+                                                <option value="jpyIeneJapones">JPY Iene japonês</option>
+                                                <option value="gbpLibraEsterlina">GBP Libra esterlina</option>
+                                                <option value="rubRubloRusso">RUB Rublo russo</option>
+                                                <option value="dkkCoroaDinamarquesa">DKK Coroa dinamarquesa</option>
+                                                <option value="nokCoroaNorueguesa">NOK Coroa norueguesa</option>
+                                                <option value="sekCoroaSueca">SEK Coroa sueca</option>
+                                                <option value="arsPesoArgentino">ARS Peso argentino</option>
+                                                <option value="clpPesoChileno">CLP Peso chileno</option>
+                                                <option value="copPesoColombiano">COP peso colombiano</option>
+                                                <option value="mxnPesoMexicano">MXN Peso mexicano</option>
+                                                <option value="uyuPesoUruguaio">UYU Peso uruguaio</option>
+                                                <option value="zarRandeSulAfricano">ZAR Rande sul-africano</option>
+                                                <option value="ilsShekel">ILS Shekel</option>
+                                                <option value="aedDirhan">AED Dirhan</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classOrdem">
+                                        <div class="form-group">
+                                            <label class="control-label" for="moedaEstrangeira">Valor da Moeda Estrangeira</label>
+                                            <input type="text" class="form-control mask-money campoOrdem" id="moedaEstrangeira" name="moedaEstrangeira" onblur="calcTotal(this);">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classOrdem">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataCredito">Data de Crédito</label>
+                                            <input type="text" class="form-control campo-data campoOrdem campoFechamento" id="dataCredito" name="dataCredito">
+                                        </div>
+                                    </div>
+
+                                   
+                                    
+                                </div>
+
+                                <div class="row classFechamento">
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-3">
+                                        <div class="form-group">
+                                            <label class="control-label" for="dataFechamento">Data de Fechamento</label>
+                                            <input type="text" class="form-control campo-data campoFechamento" id="dataFechamento" name="dataFechamento">
+                                        </div>
+                                    </div>                                 
+                                
+                                    <div class="col-xs-12 col-sm-6 col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label" for="fnContrato">Contrato</label>
+                                            <div class="componentAnexo">
+                                                <div class="input-group">
+                                                    <input type="hidden" class="descAnexo" name="fdContrato" value="Contrato" />
+                                                    <input type="text" id="fnContrato" name="fnContrato" class="form-control inputAnexo" placeholder="Selecione um arquivo" readonly />
+                                                </div>
+                                                <div class="icones">
+                                                    <button type="button" class="btnUpFile btn btn-success" data-acao="upload" onclick="anexo(event)" title="Selecionar">
+                                                        <i class="fluigicon fluigicon-file-upload"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnViewerFile btn btn-info" data-acao="viewer" onclick="anexo(event)" title="Visualizar" disabled>
+                                                        <i class="fluigicon fluigicon-eye-open"></i>
+                                                    </button>
+                                                    <button style="display: none;" type="button" class="btnDownloadFile btn btn-info" data-acao="download" onclick="anexo(event)" title="Download" disabled>
+                                                        <i class="fluigicon fluigicon-download"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="taxaCliente">Taxa Cliente</label>
+                                            <input type="text" class="form-control mask-money campoFechamento" id="taxaCliente" name="taxaCliente" onblur="calcTotal(this);">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-3 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="taxaSpot">Taxa Spot</label>
+                                            <input type="text" class="form-control mask-money campoFechamento" id="taxaSpot" name="taxaSpot" onblur="calcTotal(this);">
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="despesaBanc">Despesa Bancária</label>
+                                            <input type="text" class="form-control mask-money campoFechamento" id="despesaBanc" name="despesaBanc" onblur="calcTotal(this);">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="iof">IOF</label>
+                                            <select class="form-control campoFechamento" name="iof" id="iof" onchange="calcTotal(this);">
+                                                <option value="">Selecionar</option>
+                                                <option value="0.38">0,38%</option>
+                                                <option value="1.1">1,1%</option>
+                                                <option value="4.38">4,38%</option>
+                                                <option value="3.5">3,5%</option>
+                                                <option value="0">Isento</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="valorTotal">Valor Total R$</label>
+                                            <input type="text" class="form-control" id="valorTotal" name="valorTotal" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="spreadUtilizado">Spread %</label>
+                                            <input type="text" class="form-control campoFechamento mask-money" id="spreadUtilizado" name="spreadUtilizado">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="spreadEmReais">Spread R$</label>
+                                            <input type="text" class="form-control campoFechamento" id="spreadEmReais" name="spreadEmReais" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6 col-md-4 classFechamento">
+                                        <div class="form-group">
+                                            <label class="control-label" for="comissao">Comissão</label>
+                                            <input type="text" class="form-control mask-money" id="comissao" name="comissao" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row secObservacoes">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <label class="control-label" for="observacoes">Observações</label>
+                                            <textarea class="form-control" rows="3" id="observacoes" name="observacoes"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </section>
+                            <!-- FINAL: informações do solicitante -->
+                        </div>
+                    </div>
+                    
+                    <!-- INÍCIO: campos ocultos do formulário -->
+                    <section class="secCamposHidden" id="secCamposHidden" style="display:none;">
+                        <input type="hidden" name="retornoProtheus" id="retornoProtheus">
+                        <input type="hidden" name="tipoCliente" id="tipoCliente">
+                    </section>
+                    <!-- FINAL: campos ocultos do formulário -->
+
+                </div>
+
+            </div>
+
+        </form>
+        <!-- FINAL: formulário geral -->
+	</div>
+	
+	<!-- script abaixo controla o botão que apaga o CPF/CNPJ -->
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+    
+</body>
+</html>
