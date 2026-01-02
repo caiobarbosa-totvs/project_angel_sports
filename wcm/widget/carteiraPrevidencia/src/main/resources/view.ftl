@@ -1,0 +1,142 @@
+<div id="CarteiraPrevidencia_${instanceId}"
+	class="super-widget wcm-widget-class fluig-style-guide"
+	data-params="CarteiraPrevidencia.instance()">
+
+	<div class="panel-body" style="margin-top: -30px;">
+
+		<h1 id="tituloTipo_${instanceId}" style="text-align: center;">Carteira Previdência</h1>
+
+		<div class="form-group row">
+
+			<div class="col-md-4">
+				<label for="nm_cliente_${instanceId}">Cliente</label>
+				<input type="text" class="form-control"
+					name="nm_cliente_${instanceId}" id="nm_cliente_${instanceId}">
+					<input type="hidden" class="form-control"
+						name="cpfCnpj_${instanceId}" id="cpfCnpj_${instanceId}">
+			</div>
+
+			<div class="col-md-4">
+				<label for="nm_seguradora_${instanceId}">Seguradora</label>
+				<input type="text" class="form-control"
+					name="nm_seguradora_${instanceId}" id="nm_seguradora_${instanceId}">
+					<input type="hidden" class="form-control"
+						name="cd_seguradora_${instanceId}"
+						id="cd_seguradora_${instanceId}">
+			</div>
+
+			<div class="col-md-2">
+				<label for="periodoInicial_${instanceId}">Período Inicial</label>
+				<input type="text" class="form-control dateAtual"
+					name="periodoInicial_${instanceId}"
+					id="periodoInicial_${instanceId}">
+			</div>
+
+			<div class="col-md-2">
+				<label for="periodoFinal_${instanceId}">Período Final</label>
+				<input type="text" class="form-control dateAtual"
+					name="periodoFinal_${instanceId}" id="periodoFinal_${instanceId}">
+			</div>
+
+		</div>
+
+		<div class="form-group row">
+
+			<div class="col-md-3">
+				<button type="button" data-consultaDados class="btn btn-info">Consultar
+					Dados</button>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<div class="tableCarteiraPrevidencia fs-display-none">
+				<h2 class="tituloTableCarteiraPrevidencia"></h2>
+				<div class="table-responsive">
+
+					<table id="tableCarteiraPrevidencia" style="width: 100%"
+						class="display nowrap">
+						<thead>
+							<tr>
+								<!-- 1. Dados Básicos -->
+								<th>CLIENTE</th>
+								<th>SEGURADORA</th>
+								<th>PROPOSTA</th>
+
+								<!-- 2. Dados de Proposta e Aportes (Onde a confusão estava) -->
+								<th>MENSALIDADE FIXA (PROPOSTA)</th>
+								<th>APORTE FIXO (PROPOSTA)</th>
+								<th>INVESTIMENTO MENSAL (SALDO)</th>
+								<th>APORTE ESPORÁDICO</th>
+
+								<!-- 3. Dados Acumulados (Resultado) -->
+								<th>RENTABILIDADE</th>
+								<!--  <th>SALDO TOTAL (C/ RENTAB.)</th>--> <!-- Corresponde a totalRentabilidadeSaldo -->
+
+								<!-- 4. Resgates e Fundos -->
+								<th>RESGATE</th>
+								<th>SALDO ACUMULADO (INVESTIMENTO)</th> <!-- Corresponde a txt_seguradoraSaldo -->
+								<th>VGBL / PGBL</th>
+								<th>FUNDO</th>
+								<th>PERCENTUAL FUNDO</th>
+
+								<!-- REMOVIDO: <th>TOTAL</th> -->
+							</tr>
+						</thead>
+					</table>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+<script type="text/template" class="tag-cliente">
+	{{A1_NOME}}
+</script>
+
+<script type="text/template" class="sugestao-cliente">
+	{{A1_NOME}} - {{A1_CGC}}
+</script>
+
+<script type="text/template" class="tag-seguradora">
+	{{A1_NOME}}
+</script>
+
+<script type="text/template" class="sugestao-seguradora">
+	{{A1_NOME}} - {{A1_COD}}
+</script>
+
+<script src="/webdesk/vcXMLRPC.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="https://cdn.datatables.net/2.0.1/css/dataTables.dataTables.css" />
+<link type="text/css" rel="stylesheet"
+	href="https://cdn.datatables.net/buttons/3.0.0/css/buttons.dataTables.css" />
+
+<script src="/carteira_previdencia_old/resources/js/underscore-min.js"></script>
+<script src="https://cdn.datatables.net/2.0.1/js/dataTables.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/3.0.0/js/dataTables.buttons.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.dataTables.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.html5.min.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.print.min.js"></script>
+<script
+	src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.colVis.min.js"></script>
+
+<!-- <script src="https://cdn.datatables.net/colreorder/2.0.2/js/dataTables.colReorder.js"></script> 
+	<script src="https://cdn.datatables.net/colreorder/2.0.2/js/colReorder.dataTables.js"></script> -->
+
+
+
